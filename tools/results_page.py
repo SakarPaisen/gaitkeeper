@@ -34,6 +34,7 @@ CAUSES = {
     "walk": ("Arm walk", "Stands, but the random arm motion knocks it down"),
     "punch": ("Punches", "Survives the arms, falls to the punches"),
     "unclear": ("Unclear", "Falls with the port's values; no upstream config read"),
+    "none": ("Survives", "Survives every stage within 5 s of its own setup"),
 }
 
 CSS = """
@@ -42,7 +43,7 @@ CSS = """
   --bg: #f4f6f8; --panel: #ffffff; --ink: #121820; --muted: #566273; --rule: #d6dce4;
   --accent: #1f5f8b; --bar: #9fb3c8; --bar-up: #1f5f8b;
   --c-policy: #5d6b7d; --c-port: #b4372b; --c-arms: #a3650a; --c-walk: #c98a12;
-  --c-punch: #7a5bb0; --c-unclear: #8a94a3;
+  --c-punch: #7a5bb0; --c-unclear: #8a94a3; --c-none: #2e7d4f;
   --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -51,12 +52,12 @@ CSS = """
   --bg: #0f141a; --panel: #161d25; --ink: #e6ebf1; --muted: #9aa6b5; --rule: #2a3440;
   --accent: #6fb3e0; --bar: #3e5166; --bar-up: #6fb3e0;
   --c-policy: #8f9db0; --c-port: #ef6f5f; --c-arms: #e0a03a; --c-walk: #f0c050;
-  --c-punch: #ad92e0; --c-unclear: #7d8796; color-scheme: dark; } }
+  --c-punch: #ad92e0; --c-unclear: #7d8796; --c-none: #5fbf86; color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #0f141a; --panel: #161d25; --ink: #e6ebf1; --muted: #9aa6b5; --rule: #2a3440;
   --accent: #6fb3e0; --bar: #3e5166; --bar-up: #6fb3e0;
   --c-policy: #8f9db0; --c-port: #ef6f5f; --c-arms: #e0a03a; --c-walk: #f0c050;
-  --c-punch: #ad92e0; --c-unclear: #7d8796; color-scheme: dark; }
+  --c-punch: #ad92e0; --c-unclear: #7d8796; --c-none: #5fbf86; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); margin: 0; }
 .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; }
@@ -87,7 +88,8 @@ details { border-bottom: 1px solid var(--rule); }
 summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 9.5rem 7.5rem 128px minmax(0, 1fr) 4.6rem 4.6rem; gap: 14px; align-items: center; padding-block: 12px; }
 summary::-webkit-details-marker { display: none; }
 summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-summary .name { font: 600 0.95rem var(--f-mono); }
+summary .name { font: 600 0.95rem var(--f-mono); overflow-wrap: anywhere; }
+summary .name small { display: block; font: 400 0.78rem var(--f-mono); color: var(--muted); }
 summary .verdict { color: var(--muted); font-size: 0.9rem; min-width: 0; }
 summary .s { text-align: right; }
 .head { display: grid; grid-template-columns: 9.5rem 7.5rem 128px minmax(0, 1fr) 4.6rem 4.6rem; gap: 14px; padding-block: 8px; color: var(--muted); font: 600 0.7rem var(--f-mono); letter-spacing: 0.05em; text-transform: uppercase; }
@@ -123,7 +125,7 @@ svg text { fill: var(--muted); font: 10px var(--f-mono); }
 
 REPO = "https://github.com/dundysm/gaitkeeper"
 # Refused adapters with an open issue for the missing piece.
-ISSUES = {"handoff": 3, "holosoma": 5, "falcon": 5, "gr00t_wbc": 7, "decoupled_wbc": 7}
+ISSUES: dict[str, int] = {}  # a refused port with an open issue for its missing piece
 
 
 def e(s: object) -> str:
@@ -186,6 +188,14 @@ def scatter(pols: list[dict], total: float) -> str:
     return "".join(out)
 
 
+def name_html(p: dict) -> str:
+    """A port's name, and its variant under it (gr00t_wbc / h066_p012)."""
+    port, var = p.get("port"), p.get("variant")
+    if port and var and var.startswith(port + "_"):
+        return f"{e(port)}<small>{e(var[len(port) + 1 :])}</small>"
+    return e(p["name"])
+
+
 def chip(cause: str) -> str:
     label, _ = CAUSES[cause]
     return f'<span class="chip" style="color: var(--c-{cause})">{e(label)}</span>'
@@ -218,6 +228,12 @@ def agreement(d: dict) -> dict:
     short = x < 15.0
     out["n_short"] = int(short.sum())
     out["pearson_short"] = float(np.corrcoef(x[short], y[short])[0, 1])
+    long_ = [(a, b) for a, b, _ in rows if b > 60]
+    if long_:
+        diffs = sorted(b - a for a, b in long_)
+        out["n_long"] = len(long_)
+        out["n_long_less"] = sum(dd > 0 for dd in diffs)
+        out["long_median"] = float(np.median(diffs))
     px = [(a, c) for a, _, c in rows if c is not None]
     if len(px) > 2:
         a, c = np.array([v[0] for v in px]), np.array([v[1] for v in px])
@@ -242,9 +258,16 @@ def page(d: dict) -> tuple[str, str]:
         if "pearson_physx" in ag
         else ""
     )
+    long_text = (
+        f" Of the {ag['n_long']} that last over 60 s in the benchmark, {ag['n_long_less']} last "
+        f"less here (by a median of {ag['long_median']:.0f} s), and the difference is all in the "
+        "punches: every one of them survives the arm walk here."
+        if ag.get("n_long")
+        else ""
+    )
     total = float(d["tour_s"])
     benched = [p for p in pols if p.get("stages")]
-    order = ["port", "arms", "walk", "punch", "policy", "unclear"]
+    order = ["port", "arms", "walk", "punch", "policy", "unclear", "none"]
     benched.sort(key=lambda p: (order.index(p["cause"]), p["name"]))
     notread = [p for p in pols if not p.get("stages")]
     counts = {c: sum(p.get("cause") == c for p in benched) for c in order}
@@ -277,9 +300,16 @@ def page(d: dict) -> tuple[str, str]:
         notes = "".join(f"<li>{e(n)}</li>" for n in p.get("notes", []))
         af = "".join(f"<li>{e(f)}</li>" for f in p.get("adapter_findings", []))
         pr = p.get("probe") or {}
+        src = p.get("port") or p["name"]
+        var = f" (variant {e(p['variant'])})" if p.get("variant") else ""
+        hist = (
+            f"laid out as {pr.get('history')} [term, lag] chunks"
+            if pr.get("layout") == "chunks"
+            else f"history {pr.get('history')}"
+        )
         read = (
-            f"Read from <code>policies/{e(p['name'])}/policy.cpp</code>: {pr.get('obs')} observations "
-            f"({e(', '.join(pr.get('terms', [])))}), history {pr.get('history')}, {pr.get('actions')} actions, "
+            f"Read from <code>policies/{e(src)}/policy.cpp</code>{var}: {pr.get('obs')} observations "
+            f"({e(', '.join(pr.get('terms', [])))}), {hist}, {pr.get('actions')} actions, "
             f"owned() = {pr.get('owned')}."
         )
         up = (
@@ -291,7 +321,7 @@ def page(d: dict) -> tuple[str, str]:
         dev_html = f"<pre>{e(chr(10).join(dev))}</pre>" if dev else ""
         rows.append(f"""
 <details id="{e(p["name"])}">
-  <summary><span class="name">{e(p["name"])}</span>{chip(p["cause"])}{spark(st, total)}<span class="verdict">{e(p["verdict"])}</span><span class="s num">{bench}</span><span class="s num">{mine}</span></summary>
+  <summary><span class="name">{name_html(p)}</span>{chip(p["cause"])}{spark(st, total)}<span class="verdict">{e(p["verdict"])}</span><span class="s num">{bench}</span><span class="s num">{mine}</span></summary>
   <div class="detail">
     <div class="stages"><table><thead><tr><th>Stage</th><th class="num">Mean survival (s)</th><th class="num">Completed</th></tr></thead><tbody>{stage_rows}</tbody></table></div>
     {f"<ul>{notes}</ul>" if notes else ""}
@@ -347,7 +377,7 @@ def page(d: dict) -> tuple[str, str]:
         <span><span class="big num">{ag["spearman"]:.2f}</span> <span class="eyebrow">Spearman</span></span>
       </div>
       {scatter(pols, total)}
-      <p style="font-size: .84rem; color: var(--muted)">{ag["n"]} policies. Survival of the port under the full benchmark here, against the benchmark's own MuJoCo runs; the port contracts are read from the adapters, none written by hand. Three long-surviving ports carry much of the Pearson: over the {ag["n_short"]} that last under 15 s it is {ag["pearson_short"]:.2f}.{physx_text}</p>
+      <p style="font-size: .84rem; color: var(--muted)">{ag["n"]} policies. Survival of the port under the full benchmark here, against the benchmark's own MuJoCo runs; the port contracts are read from the adapters, none written by hand. Over the {ag["n_short"]} that last under 15 s here it is {ag["pearson_short"]:.2f}.{physx_text}{long_text}</p>
     </div>
   </div>
 </section>
@@ -388,13 +418,18 @@ git clone https://github.com/rhoyn/teleop-walking-benchmark twb   # at 106faa0
 
 git clone https://github.com/unitreerobotics/unitree_rl_gym   # rl_gym's authors' config
 
-# read a port from its adapter (needs g++ or clang++)
+# read a port from its adapter (needs g++ or clang++); a port with variants reads each
 gaitkeeper adapter twb/policies/rl_gym/policy.cpp --mjcf twb/assets/g1_29dof.xml --out contracts/
+gaitkeeper adapter twb/policies/gr00t_wbc/policy.cpp --mjcf twb/assets/g1_29dof.xml --out contracts/
 
 # run the ladder, with the authors' config as the first stage when there is one
 gaitkeeper bench --adapter twb/policies/rl_gym/policy.cpp --onnx twb/policies/rl_gym/model.onnx \\
     --upstream unitree_rl_gym/deploy/deploy_mujoco/configs/g1.yaml \\
-    --mjcf twb/assets/g1_29dof.xml --seeds 3 --md rl_gym.md</pre>
+    --mjcf twb/assets/g1_29dof.xml --seeds 10 --md rl_gym.md
+
+# a variant, by name (its models are found next to the one given)
+gaitkeeper bench --adapter twb/policies/gr00t_wbc/policy.cpp --variant gr00t_wbc_h066_p012 \\
+    --onnx twb/policies/gr00t_wbc/model_walk.onnx --mjcf twb/assets/g1_29dof.xml --seeds 10</pre>
   <p>Source, method and every command: <a href="https://github.com/dundysm/gaitkeeper">github.com/dundysm/gaitkeeper</a>.</p>
 </section>
 
@@ -443,10 +478,12 @@ def main() -> None:
 
 SVG_CSS = """
 :root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --edge:#d1d9e0; --cell:#0969da; --pt:#0969da;
-  --policy:#59636e; --port:#cf222e; --arms:#9a6700; --walk:#bf8700; --punch:#8250df; --unclear:#8c959f; }
+  --policy:#59636e; --port:#cf222e; --arms:#9a6700; --walk:#bf8700; --punch:#8250df; --unclear:#8c959f;
+  --none:#1a7f37; }
 @media (prefers-color-scheme: dark) {
   :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --edge:#3d444d; --cell:#4493f8; --pt:#4493f8;
-    --policy:#9198a1; --port:#f85149; --arms:#d29922; --walk:#e3b341; --punch:#a371f7; --unclear:#6e7681; } }
+    --policy:#9198a1; --port:#f85149; --arms:#d29922; --walk:#e3b341; --punch:#a371f7; --unclear:#6e7681;
+    --none:#3fb950; } }
 text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif; fill: var(--fg); }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .bg { fill: var(--bg); }
@@ -466,7 +503,7 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 
 def readme_svg(d: dict) -> str:
     total = float(d["tour_s"])
-    order = ["port", "arms", "walk", "punch", "policy", "unclear"]
+    order = ["port", "arms", "walk", "punch", "policy", "unclear", "none"]
     pols = [p for p in d["policies"] if p.get("stages")]
     pols.sort(key=lambda p: (order.index(p["cause"]), p["name"]))
     cols = [
@@ -477,14 +514,14 @@ def readme_svg(d: dict) -> str:
         ("punches", "Punches"),
         ("port", "Full"),
     ]
-    x0, cw, ch, gap, top = 232, 54, 19, 3, 74
-    W = 900
+    x0, cw, ch, gap, top = 292, 54, 19, 3, 74
+    W = 960
     H = top + len(pols) * (ch + gap) + 40
     o = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t d">',
         '<title id="t">G1 Port Audit: what stops each policy</title>',
         f'<desc id="d">Mean survival on the teleop-walking-benchmark tour (out of {total:.0f} s) at each stage, '
-        "for 16 ported G1 policies, with the cause gaitkeeper names; and gaitkeeper survival against the benchmark.</desc>",
+        f"for {len(pols)} ported G1 policies, with the cause gaitkeeper names; and gaitkeeper survival against the benchmark.</desc>",
         f"<style>{SVG_CSS}</style>",
         f'<rect class="bg" width="{W}" height="{H}" rx="8"/>',
         '<text x="20" y="30" class="h">What stops each policy</text>',
@@ -498,7 +535,7 @@ def readme_svg(d: dict) -> str:
         y = top + r * (ch + gap)
         o.append(f'<text x="20" y="{y + 13.5}" class="name mono">{e(p["name"])}</text>')
         o.append(
-            f'<text x="132" y="{y + 13.5}" class="name" style="fill: var(--{p["cause"]}); font-weight:600">{e(CAUSES[p["cause"]][0])}</text>'
+            f'<text x="192" y="{y + 13.5}" class="name" style="fill: var(--{p["cause"]}); font-weight:600">{e(CAUSES[p["cause"]][0])}</text>'
         )
         for i, (k, _) in enumerate(cols):
             x = x0 + i * (cw + gap)
@@ -523,7 +560,7 @@ def readme_svg(d: dict) -> str:
         "Full results: dundysm.github.io/gaitkeeper/results</text>"
     )
     # scatter
-    sx, sy, sw, sh = 640, 96, 236, 230
+    sx, sy, sw, sh = 700, 96, 236, 230
     s = sw / total
     t = sh / total
     o.append(f'<text x="{sx - 30}" y="30" class="h">Agreement with the benchmark</text>')

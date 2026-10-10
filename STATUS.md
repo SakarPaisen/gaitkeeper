@@ -45,15 +45,15 @@ tests need traces recorded with `tools/record_mjlab.py`.
   behavior; the training config's arm damping at 4960b84 (1.0 against 10) makes 14 of 16
   envs fall, so the policy was trained with gains like deploy.yaml's. E4 recovers an
   ankle armature change on PhysX (detection only).
-* **teleop-walking-benchmark (L1).** 16 of 34 ports read, with the observation gaitkeeper
-  rebuilds matching the adapter's on random inputs (a check of the reading, not of the
-  policy). 16 are benched: 15 of those (sunny has no published weights) and holosoma, which
-  reads but whose stand-reset clock does not match. Survival on the full benchmark tracks
-  the benchmark's own MuJoCo numbers (Pearson 0.92, Spearman 0.89, n = 16) with the port
-  contracts read from the adapters, none written by hand. Three long-surviving ports carry
-  much of the Pearson: over the 12 that last under 15 s it is 0.65; against the benchmark's
-  PhysX numbers it is 0.81. Per-policy verdicts, with the authors'
-  config as a first stage for eight of them, are in the
+* **teleop-walking-benchmark (L1).** 31 of its 40 ports and variants read, with the
+  observation gaitkeeper rebuilds matching the adapter's on random inputs (a check of the
+  reading, not of the policy). 30 are benched at 10 seeds per stage (sunny has no published
+  weights). Survival on the full benchmark tracks the benchmark's own MuJoCo numbers
+  (Pearson 0.97, Spearman 0.94, n = 30) with the port contracts read from the adapters,
+  none written by hand; over the 12 that last under 15 s it is 0.77, and against the
+  benchmark's PhysX numbers 0.96. The long survivors last a median of 11 s less here, all
+  of it under the punches. Per-policy verdicts, with the authors' config as a first stage
+  for ten of them, are in the
   [G1 Port Audit](https://dundysm.github.io/gaitkeeper/results/).
 
 ## Limitations
@@ -64,9 +64,10 @@ tests need traces recorded with `tools/record_mjlab.py`.
 * Nothing here is a statement about a real robot.
 * Runner results assume the controller the contract describes; a field taken from no
   source is printed as `CONTROLLER_ASSUMED`.
-* The adapter reader refuses what it cannot rebuild exactly: reference-motion and latent
-  policies, observations of joints the policy does not drive, and clocks that reset or
-  warp. The audit page lists the 17 adapters it refuses and why.
+* The adapter reader refuses what it cannot rebuild exactly: reference-motion, latent and
+  two-network policies, a graph fed more than one observation input, a network built
+  outside the benchmark's engine interface, and joints the G1 model lacks. The audit page
+  lists the 9 adapters it refuses and why.
 * The two Unitree policy repositories have no LICENSE file at the pinned commits.
   `gaitkeeper fetch` says so and downloads them for local use; they are not
   redistributed. unitree_mujoco and MuJoCo Menagerie are BSD-3-Clause.
