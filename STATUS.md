@@ -48,11 +48,14 @@ tests need traces recorded with `tools/record_mjlab.py`.
 * **teleop-walking-benchmark (L1).** 31 of its 40 ports and variants read, with the
   observation gaitkeeper rebuilds matching the adapter's on random inputs (a check of the
   reading, not of the policy). 30 are benched at 10 seeds per stage (sunny has no published
-  weights). Survival on the full benchmark tracks the benchmark's own MuJoCo numbers
-  (Pearson 0.97, Spearman 0.94, n = 30) with the port contracts read from the adapters,
-  none written by hand; over the 12 that last under 15 s it is 0.77, and against the
-  benchmark's PhysX numbers 0.96. The ten that last over 60 s in the benchmark last a
-  median of 11 s less here, all of it under the punches. Per-policy verdicts, with the authors' config as a first stage
+  weights), seed n drawing the benchmark's run n: its waypoints, arm targets and punches,
+  from its own random streams. Survival on the full benchmark tracks the benchmark's own
+  MuJoCo numbers for the same runs (Pearson 0.98, Spearman 0.97, n = 30) with the port
+  contracts read from the adapters, none written by hand; over the 11 that last under 15 s
+  it is 0.84, and against the benchmark's PhysX numbers 0.96. Run by run, 207 of the 300
+  end within 1 s of the same run in the benchmark's MuJoCo; its own PhysX runs do so 169
+  times. The widest gap, not yet explained, is wty_cpp: 77 s here, 42 s in the benchmark's
+  MuJoCo and 33 s in its PhysX. Per-policy verdicts, with the authors' config as a first stage
   for ten of them, are in the
   [G1 Port Audit](https://dundysm.github.io/gaitkeeper/results/).
 

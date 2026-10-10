@@ -35,12 +35,13 @@ gaitkeeper tells them apart, and says how much evidence backs the answer.
 ## What it found
 
 <p align="center">
-  <a href="https://dundysm.github.io/gaitkeeper/results/"><img src="https://raw.githubusercontent.com/dundysm/gaitkeeper/main/docs/assets/audit.svg" alt="G1 Port Audit: for 30 ported G1 walking policies and variants, mean survival on the teleop-walking-benchmark tour at each stage from the authors' config to the full benchmark, the cause gaitkeeper names for each, and gaitkeeper's survival against the benchmark's (Pearson 0.97)." width="900"></a>
+  <a href="https://dundysm.github.io/gaitkeeper/results/"><img src="https://raw.githubusercontent.com/dundysm/gaitkeeper/main/docs/assets/audit.svg" alt="G1 Port Audit: for 30 ported G1 walking policies and variants, mean survival on the teleop-walking-benchmark tour at each stage from the authors' config to the full benchmark, the cause gaitkeeper names for each, and gaitkeeper's survival against the benchmark's on the same runs (Pearson 0.98)." width="900"></a>
   <br>
   <sub>Thirty G1 walking policies and variants from rhoyn/teleop-walking-benchmark, each read from its port's own
   adapter code and run one change at a time. Most stand and walk until the harness moves their arms or the punches
   start; five fall under their authors' own config. One that broke on the port's values (schoi, its waist held at
-  arm gains) is fixed in the benchmark since. <a href="https://dundysm.github.io/gaitkeeper/results/">Full audit</a>.</sub>
+  arm gains) is fixed in the benchmark since. Seed n draws the benchmark's run n, and 207 of the 300 runs end
+  within 1 s of the same run there. <a href="https://dundysm.github.io/gaitkeeper/results/">Full audit</a>.</sub>
 </p>
 
 ## How it decides

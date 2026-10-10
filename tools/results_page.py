@@ -101,6 +101,9 @@ summary .s { text-align: right; }
 }
 .detail { display: grid; gap: 14px; padding: 4px 0 20px; }
 .stages { overflow-x: auto; }
+table.runs { min-width: 0; }
+table.runs td, table.runs th { padding: 4px 10px 4px 0; }
+table.runs td.off { color: var(--accent); font-weight: 600; }
 table { border-collapse: collapse; font-size: 0.86rem; min-width: 480px; }
 th, td { text-align: left; padding: 6px 14px 6px 0; border-bottom: 1px solid var(--rule); }
 th { font: 600 0.7rem var(--f-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
@@ -176,11 +179,11 @@ def scatter(pols: list[dict], total: float) -> str:
         f'<text x="{P + (W - P - 10) / 2}" y="{H - 4}" text-anchor="middle">gaitkeeper, port under the full benchmark (s)</text>'
     )
     out.append(
-        f'<text transform="translate(10 {(H - P) / 2}) rotate(-90)" text-anchor="middle">benchmark, MuJoCo (s)</text>'
+        f'<text transform="translate(10 {(H - P) / 2}) rotate(-90)" text-anchor="middle">benchmark, MuJoCo, same runs (s)</text>'
     )
     for p in pols:
-        if p.get("stages") and p.get("benchmark_mujoco") is not None:
-            x, y = p["stages"]["port"]["mean_survival_s"], p["benchmark_mujoco"]
+        if p.get("stages") and same(p) is not None:
+            x, y = p["stages"]["port"]["mean_survival_s"], same(p)
             out.append(
                 f'<circle class="pt" cx="{P + x * s:.1f}" cy="{H - P - y * t:.1f}" r="4"><title>{e(p["name"])}: {x:.1f} s here, {y:.1f} s in the benchmark</title></circle>'
             )
@@ -211,34 +214,65 @@ def _ranks(x: np.ndarray) -> np.ndarray:
     return r
 
 
+def same(p: dict) -> float | None:
+    """The benchmark's MuJoCo mean over the runs benched here (seed n is its run id n); its
+    mean over every run it published when the runs are not given."""
+    v = p.get("benchmark_mujoco_same")
+    return p.get("benchmark_mujoco") if v is None else v
+
+
 def agreement(d: dict) -> dict:
-    """Pearson and Spearman of port survival against the benchmark's numbers, computed from
-    the published per-policy values so anyone can reproduce them from data.json."""
-    rows = [
-        (p["stages"]["port"]["mean_survival_s"], p["benchmark_mujoco"], p.get("benchmark_physx"))
+    """Agreement of port survival with the benchmark's, computed from the published values so
+    anyone can reproduce it from data.json: per policy, against the benchmark's mean over the
+    same runs (and over all its runs); per run, against the same run there, next to how
+    often the benchmark's PhysX runs land within the same margin of its MuJoCo runs."""
+    pols = [
+        p
         for p in d["policies"]
-        if p.get("stages") and "port" in p["stages"] and p.get("benchmark_mujoco") is not None
+        if p.get("stages") and "port" in p["stages"] and same(p) is not None
     ]
-    x, y = np.array([r[0] for r in rows]), np.array([r[1] for r in rows])
+    x = np.array([p["stages"]["port"]["mean_survival_s"] for p in pols])
+    y = np.array([same(p) for p in pols])
     out = {
-        "n": len(rows),
+        "n": len(pols),
         "pearson": float(np.corrcoef(x, y)[0, 1]),
         "spearman": float(np.corrcoef(_ranks(x), _ranks(y))[0, 1]),
     }
+    full = np.array([p["benchmark_mujoco"] for p in pols])
+    out["pearson_all"] = float(np.corrcoef(x, full)[0, 1])
     short = x < 15.0
     out["n_short"] = int(short.sum())
     out["pearson_short"] = float(np.corrcoef(x[short], y[short])[0, 1])
-    long_ = [(a, b) for a, b, _ in rows if b > 60]
-    if long_:
-        diffs = sorted(b - a for a, b in long_)
-        out["n_long"] = len(long_)
-        out["n_long_less"] = sum(dd > 0 for dd in diffs)
-        out["long_median"] = float(np.median(diffs))
-    px = [(a, c) for a, _, c in rows if c is not None]
+    px = [
+        (p["stages"]["port"]["mean_survival_s"], p["benchmark_physx_same"])
+        for p in pols
+        if p.get("benchmark_physx_same") is not None
+    ]
     if len(px) > 2:
-        a, c = np.array([v[0] for v in px]), np.array([v[1] for v in px])
+        a_, c_ = np.array(px).T
         out["n_physx"] = len(px)
-        out["pearson_physx"] = float(np.corrcoef(a, c)[0, 1])
+        out["pearson_physx"] = float(np.corrcoef(a_, c_)[0, 1])
+    here, mj, phx = [], [], []
+    for p in pols:
+        r = p.get("runs") or {}
+        if "mujoco" in r and "physx" in r:
+            here += r["here"]
+            mj += r["mujoco"]
+            phx += r["physx"]
+    if here:
+        h, m, q = np.array(here), np.array(mj), np.array(phx)
+        out["n_runs"] = len(h)
+        out["runs_within_1"] = int((np.abs(h - m) <= 1.0).sum())
+        out["runs_within_1_physx"] = int((np.abs(q - m) <= 1.0).sum())
+        out["runs_pearson"] = float(np.corrcoef(h, m)[0, 1])
+        out["runs_pearson_physx"] = float(np.corrcoef(q, m)[0, 1])
+    gap = max(pols, key=lambda p: abs(p["stages"]["port"]["mean_survival_s"] - same(p)))
+    out["widest"] = {
+        "name": gap["name"],
+        "here": gap["stages"]["port"]["mean_survival_s"],
+        "mujoco": same(gap),
+        "physx": gap.get("benchmark_physx_same"),
+    }
     return out
 
 
@@ -253,17 +287,23 @@ def page(d: dict) -> tuple[str, str]:
             f'  <ul style="font-size: .92rem">{items}</ul>\n</section>\n'
         )
     physx_text = (
-        f" Against the benchmark&#8217;s PhysX runs ({ag['n_physx']} policies) it is "
-        f"{ag['pearson_physx']:.2f}."
+        f" Against the benchmark&#8217;s PhysX runs it is {ag['pearson_physx']:.2f}."
         if "pearson_physx" in ag
         else ""
     )
-    long_text = (
-        f" The {ag['n_long']} that last over 60 s in the benchmark last a median of "
-        f"{ag['long_median']:.0f} s less here ({ag['n_long_less']} of them less), and the "
-        "difference is all in the punches: every one of them survives the arm walk here."
-        if ag.get("n_long")
+    runs_text = (
+        f" Run by run, {ag['runs_within_1']} of the {ag['n_runs']} runs here end within 1 s of the "
+        f"same run in the benchmark&#8217;s MuJoCo (Pearson {ag['runs_pearson']:.2f}); its own PhysX "
+        f"runs do so {ag['runs_within_1_physx']} times (Pearson {ag['runs_pearson_physx']:.2f})."
+        if "n_runs" in ag
         else ""
+    )
+    w = ag["widest"]
+    widest_text = (
+        f" The widest gap is {e(w['name'])}: {w['here']:.1f} s here, {w['mujoco']:.1f} s in the "
+        f"benchmark&#8217;s MuJoCo"
+        + (f" and {w['physx']:.1f} s in its PhysX" if w.get("physx") is not None else "")
+        + ", not yet explained."
     )
     n_refused = sum(p.get("read") == "unsupported" for p in pols)
     unbenched_read = [
@@ -300,7 +340,7 @@ def page(d: dict) -> tuple[str, str]:
     rows = []
     for p in benched:
         st = p["stages"]
-        bench = "–" if p.get("benchmark_mujoco") is None else f"{p['benchmark_mujoco']:.1f}"
+        bench = "–" if same(p) is None else f"{same(p):.1f}"
         mine = f"{st['port']['mean_survival_s']:.1f}"
         stage_rows = "".join(
             f'<tr><td>{e(label)}</td><td class="num">{st[k]["mean_survival_s"]:.1f}</td><td class="num">{st[k]["complete"]}/{st[k]["runs"]}</td></tr>'
@@ -308,6 +348,25 @@ def page(d: dict) -> tuple[str, str]:
             if k in st
         )
         notes = "".join(f"<li>{e(n)}</li>" for n in p.get("notes", []))
+        rr = p.get("runs") or {}
+        runs_html = ""
+        if "mujoco" in rr:
+            head_ = "".join(f'<th class="num">{i}</th>' for i in rr["ids"])
+
+            def cells(vals: list, ref: list | None = None) -> str:
+                return "".join(
+                    f'<td class="num{" off" if ref is not None and abs(v - r_) > 1.0 else ""}">{v:.0f}</td>'
+                    for v, r_ in zip(vals, ref or vals)
+                )
+
+            body_ = f"<tr><td>Here</td>{cells(rr['here'], rr['mujoco'])}</tr>"
+            body_ += f"<tr><td>Benchmark, MuJoCo</td>{cells(rr['mujoco'])}</tr>"
+            if "physx" in rr:
+                body_ += f"<tr><td>Benchmark, PhysX</td>{cells(rr['physx'], rr['mujoco'])}</tr>"
+            runs_html = (
+                '<div class="stages"><table class="runs"><thead><tr><th>Run</th>'
+                f"{head_}</tr></thead><tbody>{body_}</tbody></table></div>"
+            )
         af = "".join(f"<li>{e(f)}</li>" for f in p.get("adapter_findings", []))
         pr = p.get("probe") or {}
         src = p.get("port") or p["name"]
@@ -334,6 +393,7 @@ def page(d: dict) -> tuple[str, str]:
   <summary><span class="name">{name_html(p)}</span>{chip(p["cause"])}{spark(st, total)}<span class="verdict">{e(p["verdict"])}</span><span class="s num">{bench}</span><span class="s num">{mine}</span></summary>
   <div class="detail">
     <div class="stages"><table><thead><tr><th>Stage</th><th class="num">Mean survival (s)</th><th class="num">Completed</th></tr></thead><tbody>{stage_rows}</tbody></table></div>
+    {runs_html}
     {f"<ul>{notes}</ul>" if notes else ""}
     <p>{read}</p>
     {f'<p class="eyebrow">What reading the adapter found</p><ul>{af}</ul>' if af else ""}
@@ -370,7 +430,7 @@ def page(d: dict) -> tuple[str, str]:
   <span class="eyebrow">gaitkeeper {e(d["gaitkeeper"])} · teleop-walking-benchmark</span>
   <h1>G1 Port Audit</h1>
   <p class="lede">Why each Unitree G1 walking policy in rhoyn's teleop-walking-benchmark scores what it does. Each port was read from its own adapter code, then the benchmark's 90 s waypoint tour was run one change at a time: the policy as its authors configured it, the port's values, the harness taking the arms, the random arm walk, the punches.</p>
-  <div class="meta"><span>{e(d["benchmark"])}</span><span>{d["seeds"]} seeds per stage</span><span>MuJoCo, the benchmark's g1_29dof.xml</span><span>evidence L1</span><span>{e(d["generated"])}</span></div>
+  <div class="meta"><span>{e(d["benchmark"])}</span><span>runs 0&#8211;{d["seeds"] - 1}, the benchmark&#8217;s own draws</span><span>MuJoCo, the benchmark's g1_29dof.xml</span><span>evidence L1</span><span>{e(d["generated"])}</span></div>
 </header>
 
 <section>
@@ -385,9 +445,10 @@ def page(d: dict) -> tuple[str, str]:
       <div style="display:flex; gap: 22px; align-items: baseline; flex-wrap: wrap">
         <span><span class="big num">{ag["pearson"]:.2f}</span> <span class="eyebrow">Pearson</span></span>
         <span><span class="big num">{ag["spearman"]:.2f}</span> <span class="eyebrow">Spearman</span></span>
+        {f'<span><span class="big num">{ag["runs_within_1"]}/{ag["n_runs"]}</span> <span class="eyebrow">runs within 1 s</span></span>' if "n_runs" in ag else ""}
       </div>
       {scatter(pols, total)}
-      <p style="font-size: .84rem; color: var(--muted)">{ag["n"]} policies. Survival of the port under the full benchmark here, against the benchmark's own MuJoCo runs; the port contracts are read from the adapters, none written by hand. Over the {ag["n_short"]} that last under 15 s here it is {ag["pearson_short"]:.2f}.{physx_text}{long_text}</p>
+      <p style="font-size: .84rem; color: var(--muted)">{ag["n"]} policies. Survival of the port under the full benchmark here, against the benchmark&#8217;s own MuJoCo runs with the same run ids: seed n here draws the benchmark&#8217;s run n (its waypoints, arm targets and punches, from its own random streams). The port contracts are read from the adapters, none written by hand. Over the {ag["n_short"]} that last under 15 s here it is {ag["pearson_short"]:.2f}; against the benchmark&#8217;s mean over all its runs, {ag["pearson_all"]:.2f}.{physx_text}{runs_text}{widest_text}</p>
     </div>
   </div>
 </section>
@@ -411,12 +472,14 @@ def page(d: dict) -> tuple[str, str]:
 <section>
   <h2>How to read a verdict</h2>
   <div class="defs">
+    <b>Every run</b><span>Seed n draws the benchmark&#8217;s run n: its waypoints, arm targets and punches, from its own random streams. A run starts as the benchmark&#8217;s do, 3 s on a crane at the harness&#8217;s stance and then let go, and ends when the pelvis is below 0.2 m.</span>
     <b>Authors' config</b><span>The policy as its authors trained or deployed it: their gains, poses and observation, read from their config (Isaac Lab env.yaml, unitree_rl_gym, a Unitree deploy.yaml). Run with the same drive as the port, so stages differ only in values.</span>
     <b>Port's values</b><span>The values the benchmark's adapter feeds and applies, with the policy driving every joint it lists.</span>
     <b>Harness holds arms</b><span>The harness takes the arm joints from the policy and holds them at its stance with its own gains.</span>
     <b>Random arm walk</b><span>The harness moves the arms at random, as teleoperation does.</span>
     <b>Plus punches</b><span>A punch on a random link every waypoint, rising to 500 N.</span>
     <b>Port, full benchmark</b><span>All of the above with the port's own view of the arms (some ports hide arm motion from the policy).</span>
+    <b>Bench, Here</b><span>Mean survival over runs 0&#8211;{d["seeds"] - 1}: the benchmark&#8217;s MuJoCo numbers for those run ids, and the port under the full benchmark here on the same draws. A row&#8217;s run table marks a run here or in the benchmark&#8217;s PhysX that ends more than 1 s from the benchmark&#8217;s MuJoCo run.</span>
   </div>
   <p style="color: var(--muted); font-size: .92rem">Evidence L1: one runner, one model, stated assumptions. A verdict names the step that costs survival here; it is not a claim about the benchmark's own numbers, and a step that is not run cannot be blamed.</p>
 </section>
@@ -595,11 +658,11 @@ def readme_svg(d: dict) -> str:
         f'<text x="{sx + sw / 2}" y="{sy + sh + 32}" class="lab" text-anchor="middle">gaitkeeper: port, full benchmark (s)</text>'
     )
     o.append(
-        f'<text transform="translate({sx - 32} {sy + sh / 2}) rotate(-90)" class="lab" text-anchor="middle">benchmark, MuJoCo (s)</text>'
+        f'<text transform="translate({sx - 32} {sy + sh / 2}) rotate(-90)" class="lab" text-anchor="middle">benchmark, MuJoCo, same runs (s)</text>'
     )
     for p in pols:
-        if p.get("benchmark_mujoco") is not None:
-            x, y = p["stages"]["port"]["mean_survival_s"], p["benchmark_mujoco"]
+        if same(p) is not None:
+            x, y = p["stages"]["port"]["mean_survival_s"], same(p)
             o.append(
                 f'<circle class="pt" cx="{sx + x * s:.1f}" cy="{sy + sh - y * t:.1f}" r="4.5"><title>{e(p["name"])}: {x:.1f} s here, {y:.1f} s in the benchmark</title></circle>'
             )

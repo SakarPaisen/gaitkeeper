@@ -68,13 +68,13 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 27.3,
-     "complete": 0,
+     "mean_survival_s": 52.6,
+     "complete": 3,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 24.9,
-     "complete": 0,
+     "mean_survival_s": 49.5,
+     "complete": 1,
      "runs": 10
     },
     "port_quiet": {
@@ -83,18 +83,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 24.9,
-     "complete": 0,
+     "mean_survival_s": 49.5,
+     "complete": 1,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 63 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 37 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     23.34,
+     56.5,
+     25.72,
+     70.74,
+     42.1,
+     48.26,
+     25.9,
+     75.8,
+     37.14,
+     90.0
+    ],
+    "mujoco": [
+     23.14,
+     53.76,
+     25.78,
+     70.7,
+     45.9,
+     47.96,
+     25.8,
+     73.2,
+     39.62,
+     81.38
+    ],
+    "physx": [
+     21.26,
+     52.8,
+     25.54,
+     71.14,
+     22.4,
+     14.68,
+     31.36,
+     90.0,
+     34.66,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 48.724,
+   "benchmark_physx_same": 45.384
   },
   {
    "name": "bfm_zero",
@@ -154,27 +206,27 @@
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 2.1,
+     "mean_survival_s": 2.4,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.9,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.9,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 2.1,
+     "mean_survival_s": 2.4,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.9,
      "complete": 0,
      "runs": 10
     }
@@ -218,6 +270,58 @@
     "  left_shoulder_pitch_joint and 9 more: port 0.907223, the policy's own contract 0.907, diff +0.0002228 (+0.02%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     1.82,
+     2.76,
+     2.08,
+     1.84,
+     1.38,
+     2.22,
+     1.72,
+     1.8,
+     1.52,
+     1.6
+    ],
+    "mujoco": [
+     1.8,
+     2.76,
+     1.92,
+     1.88,
+     1.38,
+     2.28,
+     1.72,
+     1.78,
+     1.56,
+     1.6
+    ],
+    "physx": [
+     1.8,
+     2.64,
+     2.42,
+     1.28,
+     1.52,
+     2.46,
+     1.98,
+     1.36,
+     1.76,
+     1.6
+    ]
+   },
+   "benchmark_mujoco_same": 1.868,
+   "benchmark_physx_same": 1.882,
    "upstream": "env.yaml (Isaac Lab training run)"
   },
   {
@@ -262,8 +366,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 71.4,
-     "complete": 3,
+     "mean_survival_s": 86.7,
+     "complete": 7,
      "runs": 10
     },
     "port_quiet": {
@@ -272,18 +376,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 71.4,
-     "complete": 3,
+     "mean_survival_s": 86.7,
+     "complete": 7,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 19 s.",
+   "cause": "none",
+   "verdict": "Stands and tracks in its own setup (90 s) and survives every stage within 5 s of it.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     85.58,
+     70.7,
+     90.0,
+     90.0,
+     81.02
+    ],
+    "mujoco": [
+     90.0,
+     90.0,
+     90.0,
+     70.88,
+     90.0,
+     85.56,
+     70.86,
+     90.0,
+     90.0,
+     80.92
+    ],
+    "physx": [
+     90.0,
+     60.96,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 84.822,
+   "benchmark_physx_same": 87.096
   },
   {
    "name": "decoupled_wbc_h066_p012",
@@ -327,8 +483,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 71.3,
-     "complete": 5,
+     "mean_survival_s": 86.7,
+     "complete": 7,
      "runs": 10
     },
     "port_quiet": {
@@ -337,18 +493,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 71.3,
-     "complete": 5,
+     "mean_survival_s": 86.7,
+     "complete": 7,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 19 s.",
+   "cause": "none",
+   "verdict": "Stands and tracks in its own setup (90 s) and survives every stage within 5 s of it.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     85.58,
+     70.76,
+     90.0,
+     90.0,
+     81.08
+    ],
+    "mujoco": [
+     90.0,
+     90.0,
+     90.0,
+     70.8,
+     90.0,
+     85.56,
+     70.7,
+     90.0,
+     90.0,
+     81.36
+    ],
+    "physx": [
+     90.0,
+     90.0,
+     81.08,
+     70.88,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 84.842,
+   "benchmark_physx_same": 87.196
   },
   {
    "name": "decoupled_wbc_h070_p000",
@@ -392,8 +600,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 69.9,
-     "complete": 3,
+     "mean_survival_s": 87.6,
+     "complete": 8,
      "runs": 10
     },
     "port_quiet": {
@@ -402,18 +610,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 69.9,
-     "complete": 3,
+     "mean_survival_s": 87.6,
+     "complete": 8,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 20 s.",
+   "cause": "none",
+   "verdict": "Stands and tracks in its own setup (90 s) and survives every stage within 5 s of it.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     85.58,
+     70.74,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.96,
+     90.0,
+     71.08,
+     90.0,
+     85.58,
+     70.74,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     31.32,
+     90.0,
+     71.24,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 82.836,
+   "benchmark_physx_same": 82.256
   },
   {
    "name": "decoupled_wbc_h074_p000",
@@ -457,7 +717,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 76.8,
+     "mean_survival_s": 78.8,
      "complete": 5,
      "runs": 10
     },
@@ -467,18 +727,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 76.8,
+     "mean_survival_s": 78.8,
      "complete": 5,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 13 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 11 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.52,
+     90.0,
+     90.0,
+     40.7,
+     85.64,
+     70.76,
+     90.0,
+     90.0,
+     80.82
+    ],
+    "mujoco": [
+     90.0,
+     90.0,
+     90.0,
+     70.8,
+     90.0,
+     85.66,
+     70.74,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     60.5,
+     90.0,
+     90.0,
+     46.06,
+     90.0,
+     70.74,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 85.72,
+   "benchmark_physx_same": 80.73
   },
   {
    "name": "dm_agile",
@@ -513,44 +825,44 @@
    "max_abs": 5.930071500515055e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 3.7,
-     "complete": 0,
+     "mean_survival_s": 19.2,
+     "complete": 1,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 3.9,
+     "mean_survival_s": 2.1,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 1.7,
+     "mean_survival_s": 3.0,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.7,
+     "mean_survival_s": 2.9,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.5,
+     "mean_survival_s": 2.0,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 1.7,
+     "mean_survival_s": 1.8,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.6,
+     "mean_survival_s": 1.8,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (3.7 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (19.2 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config: no differences",
@@ -566,6 +878,58 @@
     "  left_wrist_pitch_joint and 3 more: port 1.06814, the policy's own contract 1, diff +0.06814 (+6.81%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as echo_action: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     1.72,
+     1.66,
+     1.72,
+     1.48,
+     1.62,
+     1.6,
+     2.74,
+     1.62,
+     1.58,
+     2.1
+    ],
+    "mujoco": [
+     1.7,
+     1.68,
+     1.72,
+     1.48,
+     1.6,
+     1.66,
+     2.76,
+     1.58,
+     1.52,
+     1.88
+    ],
+    "physx": [
+     2.48,
+     1.68,
+     2.0,
+     1.38,
+     1.94,
+     1.62,
+     2.0,
+     1.74,
+     1.92,
+     1.86
+    ]
+   },
+   "benchmark_mujoco_same": 1.758,
+   "benchmark_physx_same": 1.862,
    "upstream": "env.yaml (Isaac Lab training run)"
   },
   {
@@ -609,8 +973,8 @@
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 90.0,
-     "complete": 10,
+     "mean_survival_s": 81.2,
+     "complete": 9,
      "runs": 10
     },
     "arms_hold": {
@@ -619,31 +983,31 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 32.1,
+     "mean_survival_s": 28.0,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 19.2,
+     "mean_survival_s": 21.5,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 45.9,
-     "complete": 5,
+     "mean_survival_s": 19.6,
+     "complete": 2,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 13.5,
+     "mean_survival_s": 4.3,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 58 s.",
+   "verdict": "Lasts 81 s in its own setup (9/10 complete); the random arm walk costs 62 s.",
    "notes": [
-    "The port alone, arms still and no punches, costs 44 s."
+    "The port alone, arms still and no punches, costs 62 s."
    ],
    "deviation": [
     "The policy's contract against the upstream config: no differences",
@@ -659,6 +1023,58 @@
     "  left_wrist_pitch_joint and 3 more: port 1.06814, the policy's own contract 1, diff +0.06814 (+6.81%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as echo_action: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     1.34,
+     1.48,
+     1.78,
+     1.82,
+     2.06,
+     1.7,
+     26.84,
+     1.58,
+     1.68,
+     3.18
+    ],
+    "mujoco": [
+     1.34,
+     1.48,
+     1.74,
+     1.82,
+     1.78,
+     1.72,
+     26.86,
+     1.56,
+     1.66,
+     3.18
+    ],
+    "physx": [
+     1.2,
+     1.32,
+     1.6,
+     1.46,
+     1.66,
+     1.92,
+     1.96,
+     1.48,
+     1.66,
+     11.08
+    ]
+   },
+   "benchmark_mujoco_same": 4.314,
+   "benchmark_physx_same": 2.534,
    "upstream": "env.yaml (Isaac Lab training run)"
   },
   {
@@ -711,12 +1127,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 35.2,
-     "complete": 1,
+     "mean_survival_s": 81.3,
+     "complete": 8,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 21.1,
+     "mean_survival_s": 46.1,
      "complete": 0,
      "runs": 10
     },
@@ -726,18 +1142,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 21.1,
+     "mean_survival_s": 46.1,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 55 s.",
+   "cause": "punch",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 35 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     56.2,
+     51.18,
+     60.96,
+     26.22,
+     40.44,
+     31.38,
+     46.24,
+     25.96,
+     41.14,
+     81.64
+    ],
+    "mujoco": [
+     16.96,
+     46.4,
+     45.96,
+     26.52,
+     40.5,
+     11.24,
+     46.38,
+     41.7,
+     21.44,
+     21.14
+    ],
+    "physx": [
+     15.96,
+     26.4,
+     61.54,
+     36.12,
+     45.72,
+     65.96,
+     12.02,
+     49.72,
+     61.2,
+     65.82
+    ]
+   },
+   "benchmark_mujoco_same": 31.824,
+   "benchmark_physx_same": 44.046
   },
   {
    "name": "g1_gym",
@@ -770,44 +1238,44 @@
    "max_abs": 5.914050449362662e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 4.1,
+     "mean_survival_s": 4.5,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 6.3,
+     "mean_survival_s": 6.6,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 4.5,
+     "mean_survival_s": 3.2,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 2.7,
+     "mean_survival_s": 3.0,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 2.0,
+     "mean_survival_s": 3.3,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 4.5,
+     "mean_survival_s": 3.2,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 2.0,
+     "mean_survival_s": 3.3,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (4.1 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (4.5 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
@@ -834,6 +1302,58 @@
     "Port values against the policy's contract: no differences",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     4.16,
+     4.78,
+     1.34,
+     6.62,
+     1.8,
+     2.08,
+     2.06,
+     4.96,
+     2.22,
+     3.3
+    ],
+    "mujoco": [
+     1.66,
+     4.36,
+     3.38,
+     3.88,
+     1.78,
+     1.94,
+     2.68,
+     2.24,
+     3.44,
+     2.04
+    ],
+    "physx": [
+     1.86,
+     1.74,
+     1.14,
+     1.8,
+     1.06,
+     1.1,
+     1.62,
+     3.12,
+     2.6,
+     4.9
+    ]
+   },
+   "benchmark_mujoco_same": 2.74,
+   "benchmark_physx_same": 2.094,
    "upstream": "g1_full.yaml (hand contract)"
   },
   {
@@ -880,8 +1400,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 75.2,
-     "complete": 6,
+     "mean_survival_s": 87.1,
+     "complete": 9,
      "runs": 10
     },
     "port_quiet": {
@@ -890,18 +1410,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 75.2,
-     "complete": 6,
+     "mean_survival_s": 87.1,
+     "complete": 9,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 15 s.",
+   "cause": "none",
+   "verdict": "Stands and tracks in its own setup (90 s) and survives every stage within 5 s of it.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.88,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.78,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     90.0,
+     90.0,
+     71.16,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 87.078,
+   "benchmark_physx_same": 88.116
   },
   {
    "name": "gr00t_wbc_h066_p012",
@@ -947,8 +1519,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 68.3,
-     "complete": 5,
+     "mean_survival_s": 87.1,
+     "complete": 9,
      "runs": 10
     },
     "port_quiet": {
@@ -957,18 +1529,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 68.3,
-     "complete": 5,
+     "mean_survival_s": 87.1,
+     "complete": 9,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 22 s.",
+   "cause": "none",
+   "verdict": "Stands and tracks in its own setup (90 s) and survives every stage within 5 s of it.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.82,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     61.02,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     90.0,
+     90.0,
+     71.14,
+     55.9,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 87.102,
+   "benchmark_physx_same": 84.704
   },
   {
    "name": "gr00t_wbc_h070_p000",
@@ -1014,8 +1638,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 77.2,
-     "complete": 6,
+     "mean_survival_s": 83.7,
+     "complete": 8,
      "runs": 10
     },
     "port_quiet": {
@@ -1024,18 +1648,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 77.2,
-     "complete": 6,
+     "mean_survival_s": 83.7,
+     "complete": 8,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 13 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 6 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     61.04,
+     90.0,
+     90.0,
+     55.96,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.94,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     66.02,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 87.094,
+   "benchmark_physx_same": 87.602
   },
   {
    "name": "gr00t_wbc_h074_p000",
@@ -1081,8 +1757,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 83.6,
-     "complete": 8,
+     "mean_survival_s": 81.8,
+     "complete": 7,
      "runs": 10
     },
     "port_quiet": {
@@ -1091,18 +1767,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 83.6,
-     "complete": 8,
+     "mean_survival_s": 81.8,
+     "complete": 7,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 6 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 8 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.62,
+     90.0,
+     71.48,
+     55.72,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.78,
+     90.0,
+     71.2,
+     55.7,
+     90.0,
+     90.0,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     60.96,
+     90.0,
+     90.0,
+     55.72,
+     90.0,
+     70.92,
+     90.0,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 81.768,
+   "benchmark_physx_same": 81.76
   },
   {
    "name": "handoff",
@@ -1168,12 +1896,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 18.8,
+     "mean_survival_s": 29.2,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 15.3,
+     "mean_survival_s": 23.9,
      "complete": 0,
      "runs": 10
     },
@@ -1183,14 +1911,14 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 15.3,
+     "mean_survival_s": 23.9,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 71 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 61 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract:",
@@ -1204,7 +1932,59 @@
     "  left_shoulder_pitch_joint and 9 more: port 0.907223, the policy's own contract 0.90722, diff +2.843e-06 (+0.00%)",
     "  left_wrist_yaw_joint and 3 more: port 1.06814, the policy's own contract 1.06814, diff +1.502e-06 (+0.00%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     12.66,
+     15.72,
+     25.48,
+     36.02,
+     21.54,
+     56.96,
+     16.92,
+     16.7,
+     23.6,
+     13.66
+    ],
+    "mujoco": [
+     11.54,
+     17.12,
+     25.1,
+     32.12,
+     19.44,
+     66.08,
+     19.1,
+     16.7,
+     15.98,
+     13.66
+    ],
+    "physx": [
+     13.8,
+     25.22,
+     28.88,
+     20.78,
+     21.08,
+     48.14,
+     20.26,
+     16.74,
+     24.06,
+     13.14
+    ]
+   },
+   "benchmark_mujoco_same": 23.684,
+   "benchmark_physx_same": 23.21
   },
   {
    "name": "holosoma",
@@ -1267,12 +2047,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 6.7,
+     "mean_survival_s": 4.6,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 6.8,
+     "mean_survival_s": 6.2,
      "complete": 0,
      "runs": 10
     },
@@ -1282,19 +2062,71 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 6.8,
+     "mean_survival_s": 6.2,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 83 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 85 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     8.56,
+     3.88,
+     15.1,
+     7.7,
+     5.9,
+     7.4,
+     3.76,
+     4.04,
+     4.08,
+     1.52
+    ],
+    "mujoco": [
+     13.26,
+     4.28,
+     14.94,
+     7.88,
+     5.1,
+     7.4,
+     3.68,
+     3.92,
+     3.36,
+     2.42
+    ],
+    "physx": [
+     11.38,
+     4.1,
+     14.86,
+     10.76,
+     8.46,
+     7.62,
+     2.44,
+     3.56,
+     3.36,
+     3.22
+    ]
+   },
+   "benchmark_mujoco_same": 6.624,
+   "benchmark_physx_same": 6.976
   },
   {
    "name": "homie",
@@ -1344,8 +2176,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 63.9,
-     "complete": 3,
+     "mean_survival_s": 79.4,
+     "complete": 5,
      "runs": 10
     },
     "port_quiet": {
@@ -1354,18 +2186,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 63.9,
-     "complete": 3,
+     "mean_survival_s": 79.4,
+     "complete": 5,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 26 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 11 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.66,
+     90.0,
+     70.8,
+     55.92,
+     85.78,
+     70.86,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.64,
+     90.0,
+     71.54,
+     56.06,
+     85.64,
+     70.86,
+     90.0,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     90.0,
+     76.82,
+     52.98,
+     71.26,
+     57.18,
+     90.0,
+     46.96,
+     90.0,
+     61.08,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 79.474,
+   "benchmark_physx_same": 72.628
   },
   {
    "name": "huru",
@@ -1409,12 +2293,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 9.3,
+     "mean_survival_s": 8.6,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 7.0,
+     "mean_survival_s": 6.3,
      "complete": 0,
      "runs": 10
     },
@@ -1424,7 +2308,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 7.0,
+     "mean_survival_s": 6.3,
      "complete": 0,
      "runs": 10
     }
@@ -1445,7 +2329,59 @@
     "  left_shoulder_pitch_joint and 9 more: port 0.907223, the policy's own contract 0.907, diff +0.0002228 (+0.02%)",
     "  left_wrist_yaw_joint and 3 more: port 1.06814, the policy's own contract 1.068, diff +0.0001415 (+0.01%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     6.48,
+     7.68,
+     4.4,
+     6.8,
+     9.98,
+     6.74,
+     5.66,
+     3.96,
+     4.62,
+     6.9
+    ],
+    "mujoco": [
+     6.58,
+     7.74,
+     4.34,
+     6.84,
+     10.24,
+     9.26,
+     5.7,
+     5.78,
+     4.6,
+     12.24
+    ],
+    "physx": [
+     2.84,
+     7.42,
+     17.44,
+     3.92,
+     10.52,
+     8.64,
+     5.34,
+     11.62,
+     4.54,
+     5.4
+    ]
+   },
+   "benchmark_mujoco_same": 7.332,
+   "benchmark_physx_same": 7.768
   },
   {
    "name": "josabb",
@@ -1490,41 +2426,41 @@
    "max_abs": 7.006450242208473e-08,
    "stages": {
     "own": {
-     "mean_survival_s": 87.2,
+     "mean_survival_s": 87.3,
      "complete": 9,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 9.4,
+     "mean_survival_s": 18.8,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 8.1,
+     "mean_survival_s": 4.2,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 8.0,
+     "mean_survival_s": 4.8,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 9.4,
+     "mean_survival_s": 18.8,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 8.0,
+     "mean_survival_s": 4.8,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "arms",
-   "verdict": "Lasts 87 s in its own setup (9/10 complete); the harness taking the arms costs 78 s.",
+   "verdict": "Lasts 87 s in its own setup (9/10 complete); the harness taking the arms costs 69 s.",
    "notes": [
-    "The port alone, arms still and no punches, costs 78 s."
+    "The port alone, arms still and no punches, costs 69 s."
    ],
    "deviation": [
     "Port values against the policy's contract:",
@@ -1538,7 +2474,59 @@
     "  left_shoulder_pitch_joint and 9 more: port 0.907223, the policy's own contract 1, diff -0.09278 (-9.28%)",
     "  left_wrist_pitch_joint and 3 more: port 1.06814, the policy's own contract 1, diff +0.06814 (+6.81%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     3.76,
+     2.22,
+     3.38,
+     3.72,
+     3.84,
+     4.44,
+     3.44,
+     4.58,
+     9.34,
+     8.84
+    ],
+    "mujoco": [
+     3.44,
+     2.84,
+     3.06,
+     1.62,
+     2.42,
+     2.34,
+     3.92,
+     3.26,
+     2.98,
+     10.72
+    ],
+    "physx": [
+     3.82,
+     2.62,
+     3.5,
+     2.52,
+     3.62,
+     3.78,
+     3.1,
+     2.28,
+     2.12,
+     8.08
+    ]
+   },
+   "benchmark_mujoco_same": 3.66,
+   "benchmark_physx_same": 3.544
   },
   {
    "name": "mimic_lite",
@@ -1600,44 +2588,44 @@
    "max_abs": 7.317204464563076e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 3.5,
+     "mean_survival_s": 2.4,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 4.9,
+     "mean_survival_s": 3.1,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 3.3,
+     "mean_survival_s": 3.4,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 2.0,
+     "mean_survival_s": 1.9,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 2.7,
+     "mean_survival_s": 1.8,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 6.3,
+     "mean_survival_s": 2.9,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 3.1,
+     "mean_survival_s": 2.2,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (3.5 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (2.4 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
@@ -1660,6 +2648,58 @@
     "port: harness drives 3 joint(s) (hold), policy sees them as real: waist_yaw_joint, waist_roll_joint, waist_pitch_joint",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     2.16,
+     2.3,
+     2.76,
+     1.78,
+     2.36,
+     2.28,
+     1.42,
+     3.12,
+     1.74,
+     2.22
+    ],
+    "mujoco": [
+     2.1,
+     1.68,
+     2.72,
+     1.82,
+     3.56,
+     2.08,
+     2.1,
+     1.64,
+     1.42,
+     2.08
+    ],
+    "physx": [
+     2.62,
+     2.08,
+     2.96,
+     3.84,
+     2.52,
+     1.96,
+     2.14,
+     2.64,
+     1.36,
+     2.22
+    ]
+   },
+   "benchmark_mujoco_same": 2.12,
+   "benchmark_physx_same": 2.434,
    "upstream": "deploy_g1.py (authors' deploy)"
   },
   {
@@ -1712,12 +2752,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 56.4,
-     "complete": 4,
+     "mean_survival_s": 73.3,
+     "complete": 6,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 27.2,
+     "mean_survival_s": 34.1,
      "complete": 0,
      "runs": 10
     },
@@ -1727,18 +2767,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 27.2,
+     "mean_survival_s": 34.1,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 34 s.",
+   "cause": "punch",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 39 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     11.66,
+     26.28,
+     36.16,
+     41.36,
+     55.68,
+     26.38,
+     26.08,
+     53.86,
+     41.18,
+     22.82
+    ],
+    "mujoco": [
+     11.92,
+     36.38,
+     50.86,
+     21.26,
+     46.2,
+     19.34,
+     26.1,
+     54.22,
+     41.28,
+     23.52
+    ],
+    "physx": [
+     12.06,
+     54.28,
+     51.8,
+     42.64,
+     46.04,
+     56.88,
+     26.14,
+     42.16,
+     41.28,
+     76.24
+    ]
+   },
+   "benchmark_mujoco_same": 33.108,
+   "benchmark_physx_same": 44.952
   },
   {
    "name": "rl_gym",
@@ -1779,37 +2871,35 @@
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 72.1,
+     "mean_survival_s": 59.3,
      "complete": 4,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 18.8,
-     "complete": 0,
+     "mean_survival_s": 50.5,
+     "complete": 2,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 14.2,
+     "mean_survival_s": 21.2,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 72.1,
+     "mean_survival_s": 59.3,
      "complete": 4,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 14.2,
+     "mean_survival_s": 21.2,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
-   "cause": "walk",
-   "verdict": "Lasts 72 s in its own setup (4/10 complete); the random arm walk costs 53 s.",
-   "notes": [
-    "The port's values cost 18 s against the authors' config (90 to 72.1 s)."
-   ],
+   "cause": "port",
+   "verdict": "The port's values cost 31 s against the authors' config (90 to 59.3 s).",
+   "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
     "scale: no joint differs beyond the reference's float32 rounding",
@@ -1823,6 +2913,58 @@
     "unlisted kd: 17 of 17 joint(s) differ; largest left_elbow_joint contract 0.9072 against 10",
     "Port values against the policy's contract: no differences"
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     30.7,
+     11.68,
+     36.1,
+     17.5,
+     40.98,
+     10.8,
+     11.46,
+     12.82,
+     25.64,
+     14.28
+    ],
+    "mujoco": [
+     10.24,
+     27.56,
+     51.58,
+     7.5,
+     55.68,
+     24.26,
+     13.1,
+     26.12,
+     21.18,
+     16.18
+    ],
+    "physx": [
+     30.92,
+     40.76,
+     51.02,
+     37.7,
+     55.66,
+     15.8,
+     32.66,
+     41.96,
+     42.72,
+     55.84
+    ]
+   },
+   "benchmark_mujoco_same": 25.34,
+   "benchmark_physx_same": 40.504,
    "upstream": "configs/g1.yaml (unitree_rl_gym)"
   },
   {
@@ -1858,8 +3000,8 @@
    "max_abs": 4.166990758003308e-08,
    "stages": {
     "own": {
-     "mean_survival_s": 89.8,
-     "complete": 9,
+     "mean_survival_s": 90.0,
+     "complete": 10,
      "runs": 10
     },
     "arms_hold": {
@@ -1868,12 +3010,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 10.2,
+     "mean_survival_s": 7.3,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 9.4,
+     "mean_survival_s": 7.8,
      "complete": 0,
      "runs": 10
     },
@@ -1883,16 +3025,16 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 35.5,
-     "complete": 1,
+     "mean_survival_s": 33.2,
+     "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Lasts 90 s in its own setup (9/10 complete); the random arm walk costs 80 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 83 s.",
    "notes": [
-    "The port survives 26 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
+    "The port survives 25 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
    ],
    "deviation": [
     "Port values against the policy's contract:",
@@ -1906,7 +3048,59 @@
     "  left_shoulder_pitch_joint and 9 more: port 0.907223, the policy's own contract 10, diff -9.093 (-90.93%)",
     "  left_wrist_pitch_joint and 3 more: port 1.06814, the policy's own contract 10, diff -8.932 (-89.32%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as echo_action: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     18.14,
+     28.76,
+     43.42,
+     18.68,
+     31.44,
+     13.62,
+     31.42,
+     48.3,
+     65.76,
+     32.58
+    ],
+    "mujoco": [
+     20.9,
+     28.74,
+     43.38,
+     17.68,
+     32.76,
+     13.3,
+     31.74,
+     47.36,
+     88.0,
+     23.82
+    ],
+    "physx": [
+     17.9,
+     11.68,
+     42.8,
+     16.82,
+     12.06,
+     23.82,
+     31.2,
+     46.28,
+     18.76,
+     32.2
+    ]
+   },
+   "benchmark_mujoco_same": 34.768,
+   "benchmark_physx_same": 25.352
   },
   {
    "name": "rl_mjlab",
@@ -1955,12 +3149,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 6.4,
+     "mean_survival_s": 5.0,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 5.2,
+     "mean_survival_s": 4.9,
      "complete": 0,
      "runs": 10
     },
@@ -1970,14 +3164,14 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 5.2,
+     "mean_survival_s": 4.9,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 84 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 85 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract:",
@@ -1991,7 +3185,59 @@
     "  left_wrist_yaw_joint and 3 more: port 1.06814, the policy's own contract 1.1, diff -0.03186 (-2.90%)",
     "  left_elbow_joint and 9 more: port 0.907223, the policy's own contract 0.9, diff +0.007223 (+0.80%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     4.08,
+     5.88,
+     5.12,
+     3.46,
+     6.98,
+     3.7,
+     4.04,
+     2.64,
+     10.46,
+     2.98
+    ],
+    "mujoco": [
+     4.28,
+     5.48,
+     4.42,
+     3.2,
+     7.02,
+     3.98,
+     4.46,
+     2.62,
+     10.52,
+     3.22
+    ],
+    "physx": [
+     4.46,
+     5.88,
+     4.68,
+     4.52,
+     5.94,
+     3.96,
+     4.56,
+     2.7,
+     4.06,
+     2.18
+    ]
+   },
+   "benchmark_mujoco_same": 4.92,
+   "benchmark_physx_same": 4.294
   },
   {
    "name": "robomimic",
@@ -2036,12 +3282,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 6.3,
+     "mean_survival_s": 4.5,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 6.1,
+     "mean_survival_s": 4.2,
      "complete": 0,
      "runs": 10
     },
@@ -2051,21 +3297,73 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 56.7,
-     "complete": 2,
+     "mean_survival_s": 49.9,
+     "complete": 1,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 84 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 85 s.",
    "notes": [
-    "The port survives 51 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
+    "The port survives 46 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
    ],
    "deviation": [
     "Port values against the policy's contract: no differences",
     "port: harness drives 14 joint(s) (hold), policy sees them as default: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     41.52,
+     47.86,
+     81.72,
+     31.34,
+     55.68,
+     23.14,
+     45.86,
+     56.48,
+     90.0,
+     25.2
+    ],
+    "mujoco": [
+     38.7,
+     34.86,
+     90.0,
+     34.58,
+     40.54,
+     24.8,
+     46.04,
+     55.76,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     37.8,
+     47.2,
+     80.86,
+     30.38,
+     40.68,
+     25.58,
+     45.7,
+     46.36,
+     90.0,
+     23.88
+    ]
+   },
+   "benchmark_mujoco_same": 54.528,
+   "benchmark_physx_same": 46.844
   },
   {
    "name": "run_residual",
@@ -2112,8 +3410,8 @@
    "max_abs": 7.788287348375889e-07,
    "stages": {
     "upstream": {
-     "mean_survival_s": 88.1,
-     "complete": 9,
+     "mean_survival_s": 90.0,
+     "complete": 10,
      "runs": 10
     },
     "own": {
@@ -2122,13 +3420,13 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 83.0,
-     "complete": 7,
+     "mean_survival_s": 90.0,
+     "complete": 10,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 20.2,
-     "complete": 0,
+     "mean_survival_s": 34.8,
+     "complete": 1,
      "runs": 10
     },
     "port_quiet": {
@@ -2137,14 +3435,14 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 20.2,
-     "complete": 0,
+     "mean_survival_s": 34.8,
+     "complete": 1,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 63 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 55 s.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
@@ -2158,6 +3456,58 @@
     "unlisted kd: 14 of 17 joint(s) differ; largest left_elbow_joint contract 0.9072 against 2",
     "Port values against the policy's contract: no differences"
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     30.64,
+     21.1,
+     30.72,
+     43.62,
+     16.26,
+     15.88,
+     25.82,
+     26.04,
+     48.1,
+     90.0
+    ],
+    "mujoco": [
+     30.66,
+     11.36,
+     30.66,
+     46.04,
+     46.08,
+     17.06,
+     25.72,
+     26.06,
+     47.56,
+     90.0
+    ],
+    "physx": [
+     36.12,
+     41.32,
+     32.86,
+     7.46,
+     22.56,
+     15.74,
+     26.24,
+     57.86,
+     29.04,
+     56.64
+    ]
+   },
+   "benchmark_mujoco_same": 37.12,
+   "benchmark_physx_same": 32.584,
    "upstream": "g1_sim2real.yaml (hand contract)"
   },
   {
@@ -2206,7 +3556,7 @@
    "max_abs": 4.166990758003308e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 1.3,
+     "mean_survival_s": 1.4,
      "complete": 0,
      "runs": 10
     },
@@ -2216,12 +3566,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.5,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.6,
      "complete": 0,
      "runs": 10
     },
@@ -2231,14 +3581,14 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.6,
      "complete": 0,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (1.3 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (1.4 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
@@ -2253,6 +3603,58 @@
     "unlisted kd: 17 of 17 joint(s) differ; largest left_elbow_joint contract 0.9072 against 10",
     "Port values against the policy's contract: no differences"
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     1.52,
+     1.42,
+     1.86,
+     2.9,
+     1.62,
+     1.38,
+     1.28,
+     1.38,
+     1.18,
+     1.38
+    ],
+    "mujoco": [
+     1.62,
+     1.34,
+     2.74,
+     1.7,
+     2.1,
+     1.92,
+     1.76,
+     1.4,
+     1.32,
+     2.34
+    ],
+    "physx": [
+     1.52,
+     1.32,
+     1.94,
+     1.58,
+     1.64,
+     1.94,
+     1.5,
+     1.4,
+     1.28,
+     2.4
+    ]
+   },
+   "benchmark_mujoco_same": 1.824,
+   "benchmark_physx_same": 1.652,
    "upstream": "g1_config.yaml (unitree_rl_gym)"
   },
   {
@@ -2344,22 +3746,22 @@
    "max_abs": 7.788287348375889e-07,
    "stages": {
     "upstream": {
-     "mean_survival_s": 3.7,
+     "mean_survival_s": 3.4,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 3.7,
+     "mean_survival_s": 3.4,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 4.7,
+     "mean_survival_s": 4.4,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 3.5,
+     "mean_survival_s": 3.9,
      "complete": 0,
      "runs": 10
     },
@@ -2369,7 +3771,7 @@
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 4.7,
+     "mean_survival_s": 4.4,
      "complete": 0,
      "runs": 10
     },
@@ -2381,7 +3783,7 @@
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (3.7 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (3.4 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
@@ -2438,6 +3840,58 @@
     "Port values against the policy's contract: no differences",
     "port: harness drives 8 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     1.32,
+     2.24,
+     1.52,
+     2.32,
+     4.04,
+     2.26,
+     1.9,
+     1.74,
+     2.14,
+     2.92
+    ],
+    "mujoco": [
+     1.32,
+     2.28,
+     1.52,
+     2.32,
+     4.36,
+     2.44,
+     1.92,
+     1.68,
+     2.2,
+     2.8
+    ],
+    "physx": [
+     1.3,
+     1.94,
+     1.26,
+     1.46,
+     2.54,
+     1.56,
+     2.7,
+     1.3,
+     2.14,
+     3.46
+    ]
+   },
+   "benchmark_mujoco_same": 2.284,
+   "benchmark_physx_same": 1.966,
    "upstream": "policy.onnx metadata (checkpoint)"
   },
   {
@@ -2488,12 +3942,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 15.7,
+     "mean_survival_s": 21.9,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 14.6,
+     "mean_survival_s": 21.6,
      "complete": 0,
      "runs": 10
     },
@@ -2503,16 +3957,16 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 32.4,
-     "complete": 0,
+     "mean_survival_s": 71.0,
+     "complete": 3,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 74 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 68 s.",
    "notes": [
-    "The port survives 18 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
+    "The port survives 49 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
    ],
    "deviation": [
     "The policy's contract against the upstream config: no differences",
@@ -2529,6 +3983,58 @@
     "  left_elbow_joint and 9 more: port 0.907223, the policy's own contract 0.9072, diff +2.284e-05 (+0.00%)",
     "port: harness drives 14 joint(s) (hold), policy sees them as echo_action: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
    ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     60.52,
+     90.0,
+     70.76,
+     46.26,
+     85.58,
+     60.56,
+     60.8,
+     90.0,
+     55.5
+    ],
+    "mujoco": [
+     90.0,
+     35.84,
+     21.76,
+     6.4,
+     46.9,
+     57.78,
+     6.6,
+     6.26,
+     61.52,
+     90.0
+    ],
+    "physx": [
+     80.62,
+     10.72,
+     22.08,
+     1.58,
+     45.86,
+     55.68,
+     25.3,
+     41.18,
+     20.76,
+     24.42
+    ]
+   },
+   "benchmark_mujoco_same": 42.306,
+   "benchmark_physx_same": 32.82,
    "upstream": "deploy.yaml (Unitree)"
   },
   {
@@ -2597,8 +4103,8 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 66.6,
-     "complete": 3,
+     "mean_survival_s": 73.4,
+     "complete": 5,
      "runs": 10
     },
     "port_quiet": {
@@ -2607,18 +4113,70 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 66.6,
-     "complete": 3,
+     "mean_survival_s": 73.4,
+     "complete": 5,
      "runs": 10
     }
    },
    "seconds": 90.0,
    "cause": "punch",
-   "verdict": "Stands and tracks in its own setup (90 s); punching costs 23 s.",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 17 s.",
    "notes": [],
    "deviation": [
     "Port values against the policy's contract: no differences"
-   ]
+   ],
+   "runs": {
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "here": [
+     90.0,
+     61.02,
+     51.24,
+     70.72,
+     40.48,
+     90.0,
+     90.0,
+     60.94,
+     90.0,
+     90.0
+    ],
+    "mujoco": [
+     90.0,
+     60.5,
+     90.0,
+     87.2,
+     46.52,
+     90.0,
+     90.0,
+     61.02,
+     90.0,
+     90.0
+    ],
+    "physx": [
+     32.36,
+     52.5,
+     90.0,
+     46.38,
+     90.0,
+     56.22,
+     46.86,
+     61.16,
+     90.0,
+     90.0
+    ]
+   },
+   "benchmark_mujoco_same": 79.524,
+   "benchmark_physx_same": 65.548
   }
  ],
  "changes": [
@@ -2626,9 +4184,9 @@
   "The same harness fix moves zealot in the benchmark from 8.2 s to 67.6 s. zealot is now read too: it observes the action from two steps back, joint velocities by difference, a gait clock whose period follows the command speed, and a command it steers itself toward the waypoint.",
   "nanog1 (right hip roll clamp) and homie (history start) were corrected upstream. nanog1 and wcompton, unclear in the first audit, now run their authors' configs (nanoG1's deploy_g1.py; the checkpoint's own metadata for wcompton): both fall within 4 s under them, so their scores belong to the policies, not the ports.",
   "Thirteen more ports and variants are read, each rebuilt to 1e-6 or better on random inputs: decoupled_wbc and gr00t_wbc (four variants each; gr00t_wbc switches between its walking and balance networks by the command), homie, falcon, openwbt, asap and handoff; and holosoma's observation now matches its adapter. What they needed: observed joints no action drives, the harness's arm targets, commands a port steers or gates itself (by distance, by a walk latch, by size, after a warm-up), gait clocks that stop or warp, and layouts no single history window describes.",
-  "Every stage now runs 10 seeds (3 before)."
+  "Every stage now runs 10 seeds (3 before), and seed n is the benchmark's run n: the tour, the arm walk and the punches draw from the benchmark's own random streams, so each run here pairs with the same run there. The punches now land as the benchmark's do (at the joint's anchor, in a direction that turns with the link), the arm walk redraws a target that puts a hand behind its stance position or above the head, and every run starts as the benchmark's do (3 s on a crane at the harness's stance, then let go) and ends when the pelvis is below 0.2 m."
  ],
- "pearson": 0.974,
- "spearman": 0.945,
+ "pearson": 0.983,
+ "spearman": 0.975,
  "n_corr": 30
 }
