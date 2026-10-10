@@ -4,9 +4,9 @@
  "benchmark": "rhoyn/teleop-walking-benchmark@106faa0",
  "tour_s": 90,
  "seeds": 3,
- "pearson": 0.921,
- "spearman": 0.887,
- "n_corr": 16,
+ "pearson": 0.959,
+ "spearman": 0.906,
+ "n_corr": 17,
  "policies": [
   {
    "name": "amo",
@@ -1537,15 +1537,93 @@
   },
   {
    "name": "zealot",
-   "read": "unsupported",
+   "read": "verified",
    "benchmark_mujoco": 67.64,
    "benchmark_physx": 62.03,
-   "reason": "Observes the action from two steps back, joint velocities by finite difference, and a gait period that depends on speed."
+   "probe": {
+    "obs": 265,
+    "actions": 12,
+    "owned": 12,
+    "history": 5,
+    "terms": [
+     "last_action",
+     "velocity_commands",
+     "constant",
+     "joint_pos_rel",
+     "joint_vel_diff",
+     "projected_gravity",
+     "gait_phase_speed",
+     "base_ang_vel",
+     "constant_2"
+    ],
+    "held_obs": [],
+    "clock": {
+     "id": "gait_phase_speed",
+     "period_knots": [
+      [
+       0.1,
+       0.8
+      ],
+      [
+       0.74,
+       0.4
+      ],
+      [
+       2.0,
+       0.4
+      ]
+     ],
+     "stand_speed": 0.1,
+     "speed": "norm3",
+     "advance_first": false
+    }
+   },
+   "adapter_findings": [
+    "the port observes the action from 2 steps back",
+    "a gait clock whose period follows the command speed (norm3): 0.8 s at 0.1, 0.4 s at 0.74, 0.4 s at 2; it holds below 0.1",
+    "6 observation element(s) are constants the port feeds: [227]=0, [260]=0, [261]=0, [262]=0, [263]=0, [264]=0",
+    "the port steers from the harness's task, not its velocity command: a waypoint follower with walk_p 1.5, walk_speed 0.5, yaw_p 1.2, yaw_rate_abs 0.6, vy_abs 0.3, face_near_m 0.4, face_far_m 1.5"
+   ],
+   "stages": {
+    "own": {
+     "mean_survival_s": 90.0,
+     "complete": 3,
+     "runs": 3
+    },
+    "arms_walk": {
+     "mean_survival_s": 90.0,
+     "complete": 3,
+     "runs": 3
+    },
+    "punches": {
+     "mean_survival_s": 63.5,
+     "complete": 2,
+     "runs": 3
+    },
+    "port_quiet": {
+     "mean_survival_s": 90.0,
+     "complete": 3,
+     "runs": 3
+    },
+    "port": {
+     "mean_survival_s": 63.5,
+     "complete": 2,
+     "runs": 3
+    }
+   },
+   "seconds": 90.0,
+   "upstream_source": null,
+   "cause": "punch",
+   "verdict": "Stands and tracks in its own setup (90 s); punching costs 27 s.",
+   "notes": [],
+   "deviation": [
+    "Port values against the policy's contract: no differences"
+   ]
   }
  ],
  "changes": [
   "The first audit ran at benchmark commit 6d331a8. There, schoi lost 85 s between its authors' config (90 s) and the port's values (4.7 s): the port contract held its waist at kp about 28, against 300 in the authors' config. The harness now holds every leg and waist motor at the policy's own gains (rhoyn/teleop-walking-benchmark@4ed23c2). schoi survives 25.7 s here and 31.5 s in the benchmark; what stops it now is the punches.",
-  "The same harness fix moves zealot in the benchmark from 8.2 s to 67.6 s. gaitkeeper does not read zealot's adapter (see below), so it is not benched here.",
+  "The same harness fix moves zealot in the benchmark from 8.2 s to 67.6 s. zealot is now read too: it observes the action from two steps back, joint velocities by difference, a gait clock whose period follows the command speed, and a command it steers itself toward the waypoint; gaitkeeper rebuilds its observation to 3e-6 and measures 63.5 s under the full benchmark.",
   "nanog1 (right hip roll clamp) and homie (history start) were corrected upstream; nanog1's survival is unchanged, and homie is not read. nanog1 and wcompton, unclear in the first audit, now run their authors' configs (nanoG1's deploy_g1.py; the checkpoint's own metadata for wcompton): both fall within 4 s under them, so their scores belong to the policies, not the ports."
  ]
 }
