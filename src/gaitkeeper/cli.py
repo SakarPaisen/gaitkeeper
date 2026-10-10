@@ -446,6 +446,8 @@ def cmd_tour(args: argparse.Namespace) -> int:
         hold_gains=args.hold_gains,
         punches=args.punches,
         backend=args.backend,
+        start=args.start,
+        fall=args.fall,
     )
     print(contract_header(c))
     src = "the benchmark's draws per seed" if wps is None else f"{len(wps)} from {args.waypoints}"
@@ -453,6 +455,16 @@ def cmd_tour(args: argparse.Namespace) -> int:
         f"Tour: waypoints {src}, {args.point_s:g} s each; arms {args.arms}"
         + (f" (gains {args.hold_gains}, observed {args.arms_obs})" if args.arms != "policy" else "")
         + f"; punches {args.punches}"
+        + (
+            "; starts on the benchmark's crane"
+            if args.start == "crane"
+            else "; starts at the default pose"
+        )
+        + (
+            "; a fall is the pelvis below 0.2 m"
+            if args.fall == "benchmark"
+            else "; a fall is low or tilted past 1 rad"
+        )
     )
     out = run_tour(c, args.mjcf, path, list(range(args.seeds)), opts, args.workers)
     for r in out["runs"]:
@@ -1198,6 +1210,20 @@ def main(argv: list[str] | None = None) -> int:
         choices=["none", "benchmark"],
         default="none",
         help="punches during the tour: none, or the benchmark's",
+    )
+    p.add_argument(
+        "--start",
+        choices=["crane", "default"],
+        default="crane",
+        help="crane: 3 s held at the benchmark's stance, base pinned, then let go (the "
+        "benchmark's start); default: at the policy's default pose, the policy in control",
+    )
+    p.add_argument(
+        "--fall",
+        choices=["benchmark", "tilt"],
+        default="benchmark",
+        help="benchmark: a run ends with the pelvis below 0.2 m; tilt: once the robot is low "
+        "or tilted past 1 rad",
     )
     p.add_argument(
         "--workers", type=int, help="parallel worker processes (default: one per CPU, up to 8)"
