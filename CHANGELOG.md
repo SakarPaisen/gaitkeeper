@@ -62,6 +62,12 @@
   times, as the benchmark does (`BenchHands`), and moves on the benchmark's control clock.
   Checked against the benchmark's C++ compiled from its source: the waypoints and arm
   targets of run ids 0 to 63 are bit-identical.
+* The tour starts and ends a run as the benchmark's harness does. It holds the robot 3 s on
+  a crane (the base pinned level at 0.793 m, every joint driven to the harness's STANCE at
+  its own gains), then lets go and hands the policy that state (`TourOptions.start`,
+  `RunConfig.start`, `Start`); it started at the policy's default pose. A run ends when the
+  pelvis is below 0.2 m (`TourOptions.fall`, `RunConfig.fall_z`); it ended once the robot
+  was low or tilted past 1 rad, which read falls about half a second early.
 * Adapters run from a sandbox that links the benchmark's `policies/`, so ports that read
   or patch their model files at start (handoff, wbc_agile_velocity) construct; what they
   write stays out of the checkout. TensorRT's version macros are defined for ports that

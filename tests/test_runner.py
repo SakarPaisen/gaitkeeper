@@ -1,3 +1,4 @@
+import mujoco
 import numpy as np
 import pytest
 from assets import UMJ_G1, URL_G1, need
@@ -139,6 +140,37 @@ def test_a_push_fixed_in_a_links_frame_turns_with_it(url):
         assert len(f) > 0 and np.allclose(np.linalg.norm(f, axis=1), 60.0)
         assert np.all(np.abs(f[:, axis]) > 55.0)
         assert ("frame" in res.pushes[0]) == (frame is not None)
+
+
+def test_a_start_holds_the_robot_on_a_crane_then_lets_go(url):
+    """The benchmark's harness holds the robot 3 s at its stance, the base pinned, before the
+    policy runs: the first observation sees that pose, not the policy's default."""
+    from gaitkeeper.runner import Start
+
+    r = _runner(url)
+    m = mujoco.MjModel.from_xml_path(str(UMJ_G1))
+    names = [m.joint(m.actuator_trnid[a, 0]).name for a in range(m.nu)]
+    pose = {n: (0.6 if "knee" in n else -0.3 if "hip_pitch" in n else 0.0) for n in names}
+    gains = {n: 100.0 for n in names}
+    res = r.run(
+        RunConfig(
+            seconds=0.04,
+            record=True,
+            start=Start(pose, gains, {n: 5.0 for n in names}, 0.79, 1.0),
+        )
+    )
+    q = res.log["qpos"][0]  # the state the first observation saw
+    b = r.build(RunConfig(), r.choose_backend(None))[2]
+    assert abs(q[b.base_qadr + 2] - 0.79) < 0.01
+    for n, v in pose.items():
+        assert abs(q[m.joint(n).qposadr[0]] - v) < 0.08, n  # sagging a little under load
+
+
+def test_fall_z_ends_a_run_only_when_the_base_is_that_low(url):
+    r = _runner(url)
+    limp = [r.run(RunConfig(seconds=4.0, policy_mode="zero", fall_z=z)) for z in (None, 0.2)]
+    assert limp[0].fell_at is not None and limp[1].fell_at is not None
+    assert limp[1].fell_at > limp[0].fell_at  # tilted or sagging first, lying down later
 
 
 def _legs_only(c, unlisted):

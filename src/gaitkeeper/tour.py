@@ -24,7 +24,7 @@ from typing import Any
 
 import numpy as np
 
-from .runner import External, Push
+from .runner import External, Push, Start
 
 
 def _yaw(q: np.ndarray) -> float:
@@ -169,6 +169,17 @@ BENCH_MOTORS = (
     *BENCH_ARM_LEFT,
     *BENCH_ARM_RIGHT,
 )
+# The harness's whole-body STANCE, in BENCH_MOTORS order: the crane holds it before release.
+BENCH_STANCE = (
+    *(-0.312, 0.0, 0.0, 0.669, -0.363, 0.0) * 2,
+    0.0,
+    0.0,
+    0.0,
+    *BENCH_ARM_STANCE_LEFT,
+    *(m * v for m, v in zip(BENCH_ARM_MIRROR, BENCH_ARM_STANCE_LEFT)),
+)
+BENCH_CRANE_HEIGHT_M = 0.793
+BENCH_FALL_PELVIS_Z = 0.20  # the harness ends a run when the pelvis is below this
 # The harness clock: the walk starts after 3 s, physics steps 2 ms (a float32 in the MuJoCo
 # Warp capture), and the controller runs on every 10th step. Control step k is at
 # (_BENCH_S0 + 10 k) * dt - 3 s, which the arm walk's windows are counted from.
@@ -518,6 +529,13 @@ class TourOptions:
     hold_gains: str = "armature"  # "armature" (the benchmark's) or "policy" (the contract's)
     punches: str = "none"  # "none" or "benchmark"
     backend: str | None = None
+    # "crane": as the benchmark's harness starts a run, 3 s held at STANCE with the base
+    # pinned at 0.793 m and its own gains, then let go; "default": at the policy's default
+    # pose, the policy in control from the first step
+    start: str = "crane"
+    # "benchmark": a run ends when the pelvis is below 0.2 m, as the benchmark's does;
+    # "tilt": gaitkeeper's usual (low, or tilted past 1 rad)
+    fall: str = "benchmark"
 
 
 def _tour_job(job: tuple) -> dict[str, Any]:
@@ -589,6 +607,16 @@ def _tour_job(job: tuple) -> dict[str, Any]:
     pushes = []
     if o.punches == "benchmark":
         pushes = bench_punches(seed, bench_motor_links(m))
+    start = None
+    if o.start == "crane":
+        kp, kd = armature_gains(m, list(BENCH_MOTORS))
+        start = Start(
+            dict(zip(BENCH_MOTORS, BENCH_STANCE)), kp, kd, BENCH_CRANE_HEIGHT_M, BENCH_INIT_S
+        )
+    elif o.start != "default":
+        raise ValueError(f"tour start: {o.start!r}; known: crane, default")
+    if o.fall not in ("benchmark", "tilt"):
+        raise ValueError(f"tour fall: {o.fall!r}; known: benchmark, tilt")
     res = r.run(
         RunConfig(
             backend=o.backend,
@@ -598,6 +626,8 @@ def _tour_job(job: tuple) -> dict[str, Any]:
             pushes=pushes,
             seed=seed,
             unlisted_trajectory=un_traj,
+            start=start,
+            fall_z=BENCH_FALL_PELVIS_Z if o.fall == "benchmark" else None,
         )
     )
     return {"seed": seed, **(res.task or {})}

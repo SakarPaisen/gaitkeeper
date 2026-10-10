@@ -96,6 +96,21 @@ class External:
 
 
 @dataclass
+class Start:
+    """Hold the robot before the run, as a harness's crane does: the base pinned level at
+    ``height`` over its start position for ``seconds`` while every joint in ``pose`` is
+    driven there with ``kp`` and ``kd`` (explicit PD each MuJoCo step, within the actuators'
+    force ranges); the run then starts from that state with the base let go. Time 0 is the
+    release."""
+
+    pose: dict[str, float]
+    kp: dict[str, float]
+    kd: dict[str, float]
+    height: float
+    seconds: float = 3.0
+
+
+@dataclass
 class RunConfig:
     backend: str | None = None  # None: chosen from the contract's actuator kind
     seconds: float = 10.0
@@ -123,6 +138,10 @@ class RunConfig:
     # (vx, vy, wz); overrides command and schedule. If it has report(fell_at), the result
     # carries that as ``task`` (see gaitkeeper.tour).
     command_source: Any = None
+    start: Start | None = None  # None: start at the default pose, the policy in control
+    # A fall: the base below this height (m). None: below FALL_HEIGHT_FRACTION of the start
+    # height, or tilted past FALL_TILT_RAD.
+    fall_z: float | None = None
 
 
 def pool_context():
@@ -565,6 +584,74 @@ class Runner:
             d.qpos[b.qadr] += rng.normal(0.0, cfg.init_noise, len(b.qadr))
         mujoco.mj_forward(m, d)
 
+    @staticmethod
+    def _hold_start(m: mujoco.MjModel, d: mujoco.MjData, b: Binding, st: Start) -> None:
+        """The crane (``Start``): pose the joints, pin the base, settle, let go."""
+        jids, aids = [], []
+        for nm in st.pose:
+            j = find_id(m, mujoco.mjtObj.mjOBJ_JOINT, nm)
+            if j < 0:
+                raise KeyError(f"start pose: joint {nm!r} not in the model")
+            a = next((a for a in range(m.nu) if int(m.actuator_trnid[a, 0]) == j), -1)
+            if a < 0:
+                raise KeyError(f"start pose: joint {nm!r} has no actuator")
+            jids.append(j)
+            aids.append(a)
+        jids_, aids_ = np.array(jids), np.array(aids)
+        qa, da = m.jnt_qposadr[jids_], m.jnt_dofadr[jids_]
+        pose = np.array([st.pose[n] for n in st.pose])
+        kp = np.array([st.kp[n] for n in st.pose])
+        kd = np.array([st.kd[n] for n in st.pose])
+        # torque actuators for the hold; the run's own drive is put back after
+        saved = [
+            getattr(m, f)[aids_].copy()
+            for f in (
+                "actuator_gaintype",
+                "actuator_biastype",
+                "actuator_gainprm",
+                "actuator_biasprm",
+                "actuator_gear",
+                "actuator_dyntype",
+                "actuator_ctrllimited",
+            )
+        ]
+        m.actuator_gaintype[aids_] = mujoco.mjtGain.mjGAIN_FIXED
+        m.actuator_biastype[aids_] = mujoco.mjtBias.mjBIAS_NONE
+        m.actuator_dyntype[aids_] = mujoco.mjtDyn.mjDYN_NONE
+        m.actuator_gainprm[aids_] = 0.0
+        m.actuator_gainprm[aids_, 0] = 1.0
+        m.actuator_biasprm[aids_] = 0.0
+        m.actuator_gear[aids_] = 0.0
+        m.actuator_gear[aids_, 0] = 1.0
+        m.actuator_ctrllimited[aids_] = 0
+        q0, v0 = b.base_qadr, b.base_dadr
+        d.qpos[qa] = pose
+        d.qpos[q0 + 2] = st.height
+        d.qvel[:] = 0.0
+        base = d.qpos[q0 : q0 + 7].copy()
+        ctrl = d.ctrl.copy()
+        for _ in range(int(round(st.seconds / m.opt.timestep))):
+            d.qpos[q0 : q0 + 7] = base
+            d.qvel[v0 : v0 + 6] = 0.0
+            d.ctrl[aids_] = kp * (pose - d.qpos[qa]) - kd * d.qvel[da]
+            mujoco.mj_step(m, d)
+        for f, v in zip(
+            (
+                "actuator_gaintype",
+                "actuator_biastype",
+                "actuator_gainprm",
+                "actuator_biasprm",
+                "actuator_gear",
+                "actuator_dyntype",
+                "actuator_ctrllimited",
+            ),
+            saved,
+        ):
+            getattr(m, f)[aids_] = v
+        d.ctrl[:] = ctrl
+        d.time = 0.0
+        mujoco.mj_forward(m, d)
+
     def run(self, cfg: RunConfig | None = None) -> RunResult:
         cfg = cfg or RunConfig()
         backend = self.choose_backend(cfg.backend)
@@ -624,6 +711,8 @@ class Runner:
         start_pose = np.where(owned, self.default, hold_pose)
         self.reset_state(m, d, b, cfg, start_pose, rng)
         q0, v0 = b.base_qadr, b.base_dadr
+        if cfg.start is not None:
+            self._hold_start(m, d, b, cfg.start)
         z0 = float(d.qpos[q0 + 2])
         p0 = d.qpos[q0 : q0 + 2].copy()
         builder = ObservationBuilder(self.contract)
@@ -858,12 +947,15 @@ class Runner:
             g = r.T @ np.array([0.0, 0.0, -1.0])
             roll = math.atan2(-g[1], -g[2])
             pitch = math.atan2(g[0], math.hypot(g[1], g[2]))
-            if (
-                d.qpos[q0 + 2] < FALL_HEIGHT_FRACTION * z0
-                or abs(roll) > FALL_TILT_RAD
-                or abs(pitch) > FALL_TILT_RAD
-                or not np.isfinite(d.qpos).all()
-            ):
+            if cfg.fall_z is not None:
+                fallen = d.qpos[q0 + 2] < cfg.fall_z
+            else:
+                fallen = (
+                    d.qpos[q0 + 2] < FALL_HEIGHT_FRACTION * z0
+                    or abs(roll) > FALL_TILT_RAD
+                    or abs(pitch) > FALL_TILT_RAD
+                )
+            if fallen or not np.isfinite(d.qpos).all():
                 fell_at = (t + 1) * self.policy_dt
                 break
 
