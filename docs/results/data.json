@@ -724,6 +724,11 @@
     "17 action element(s) move no motor (the port discards them): their scales are read, not measured"
    ],
    "stages": {
+    "upstream": {
+     "mean_survival_s": 3.0,
+     "complete": 0,
+     "runs": 3
+    },
     "own": {
      "mean_survival_s": 4.4,
      "complete": 0,
@@ -757,14 +762,31 @@
    },
    "seconds": 90.0,
    "upstream_source": null,
-   "cause": "unclear",
-   "verdict": "Falls within 4.4 s with the port's values; no upstream config was read to say whether the policy or the port is at fault.",
+   "cause": "policy",
+   "verdict": "Falls under its authors' own config (3.0 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
+    "The policy's contract against the upstream config:",
+    "scale: no joint differs beyond the reference's float32 rounding",
+    "offset: no joint differs beyond the reference's float32 rounding",
+    "default: no joint differs beyond the reference's float32 rounding",
+    "kp: 14 of 29 joints differ; largest relative +738.92% (left_wrist_yaw_joint)",
+    "  left_wrist_yaw_joint and 3 more: contract 16.7783, the upstream config 2, diff +14.78 (+738.92%)",
+    "  wrist_roll_joint (both sides): contract 14.2506, the upstream config 2, diff +12.25 (+612.53%)",
+    "  left_elbow_joint and 7 more: contract 14.2506, the upstream config 75, diff -60.75 (-81.00%)",
+    "kd: 26 of 29 joints differ; largest relative +434.07% (right_wrist_pitch_joint)",
+    "  right_wrist_pitch_joint and 3 more: contract 1.06814, the upstream config 0.2, diff +0.8681 (+434.07%)",
+    "  wrist_roll_joint (both sides): contract 0.907223, the upstream config 0.2, diff +0.7072 (+353.61%)",
+    "  left_hip_pitch_joint and 5 more: contract 4, the upstream config 2, diff +2 (+100.00%)",
+    "  left_elbow_joint and 7 more: contract 0.907223, the upstream config 2, diff -1.093 (-54.64%)",
+    "  ankle_pitch_joint (both sides): contract 3, the upstream config 2, diff +1 (+50.00%)",
+    "  knee_joint (both sides): contract 6, the upstream config 4, diff +2 (+50.00%)",
+    "  ankle_roll_joint (both sides): contract 2.2, the upstream config 2, diff +0.2 (+10.00%)",
     "Port values against the policy's contract: no differences",
     "port: harness drives 3 joint(s) (hold), policy sees them as real: waist_yaw_joint, waist_roll_joint, waist_pitch_joint",
     "port: harness drives 14 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_joint, left_wrist_roll_joint, left_wrist_pitch_joint ..."
-   ]
+   ],
+   "upstream": "deploy_g1.py (authors' deploy)"
   },
   {
    "name": "openwbt",
@@ -1330,6 +1352,11 @@
    },
    "adapter_findings": [],
    "stages": {
+    "upstream": {
+     "mean_survival_s": 3.8,
+     "complete": 0,
+     "runs": 3
+    },
     "own": {
      "mean_survival_s": 3.9,
      "complete": 0,
@@ -1363,13 +1390,65 @@
    },
    "seconds": 90.0,
    "upstream_source": null,
-   "cause": "unclear",
-   "verdict": "Falls within 3.9 s with the port's values; no upstream config was read to say whether the policy or the port is at fault.",
+   "cause": "policy",
+   "verdict": "Falls under its authors' own config (3.8 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
+    "The policy's contract against the upstream config:",
+    "scale: no joint differs beyond the reference's float32 rounding",
+    "offset: no joint differs beyond the reference's float32 rounding",
+    "default: no joint differs beyond the reference's float32 rounding",
+    "kp: 21 of 21 joints differ; largest relative +4.71% (right_elbow_joint)",
+    "  right_elbow_joint: contract 14.2506, the upstream config 13.60974312, diff +0.6409 (+4.71%)",
+    "  right_knee_joint: contract 99.0984, the upstream config 103.897522, diff -4.799 (-4.62%)",
+    "  right_hip_yaw_joint: contract 40.1792, the upstream config 38.53496933, diff +1.644 (+4.27%)",
+    "  left_elbow_joint: contract 14.2506, the upstream config 14.87693882, diff -0.6263 (-4.21%)",
+    "  left_ankle_roll_joint: contract 28.5012, the upstream config 29.70834541, diff -1.207 (-4.06%)",
+    "  left_hip_yaw_joint: contract 40.1792, the upstream config 41.86675644, diff -1.688 (-4.03%)",
+    "  right_hip_pitch_joint: contract 40.1792, the upstream config 41.66600037, diff -1.487 (-3.57%)",
+    "  right_ankle_roll_joint: contract 28.5012, the upstream config 29.52899551, diff -1.028 (-3.48%)",
+    "  right_shoulder_pitch_joint: contract 14.2506, the upstream config 13.78497601, diff +0.4656 (+3.38%)",
+    "  left_shoulder_roll_joint: contract 14.2506, the upstream config 13.86590099, diff +0.3847 (+2.77%)",
+    "  waist_yaw_joint: contract 28.5012, the upstream config 29.17500496, diff -0.6738 (-2.31%)",
+    "  left_hip_roll_joint: contract 99.0984, the upstream config 97.02146912, diff +2.077 (+2.14%)",
+    "  left_ankle_pitch_joint: contract 28.5012, the upstream config 27.9169178, diff +0.5843 (+2.09%)",
+    "  left_shoulder_pitch_joint: contract 14.2506, the upstream config 14.53095341, diff -0.2803 (-1.93%)",
+    "  right_hip_roll_joint: contract 99.0984, the upstream config 100.3615189, diff -1.263 (-1.26%)",
+    "  left_hip_pitch_joint: contract 40.1792, the upstream config 39.68383408, diff +0.4954 (+1.25%)",
+    "  left_shoulder_yaw_joint: contract 14.2506, the upstream config 14.42296505, diff -0.1723 (-1.19%)",
+    "  right_shoulder_yaw_joint: contract 14.2506, the upstream config 14.39964008, diff -0.149 (-1.03%)",
+    "  left_knee_joint: contract 99.0984, the upstream config 98.37251282, diff +0.7259 (+0.74%)",
+    "  right_shoulder_roll_joint: contract 14.2506, the upstream config 14.16403484, diff +0.08659 (+0.61%)",
+    "  right_ankle_pitch_joint: contract 28.5012, the upstream config 28.59693336, diff -0.09568 (-0.33%)",
+    "kd: 21 of 21 joints differ; largest relative +9.60% (right_ankle_pitch_joint)",
+    "  right_ankle_pitch_joint: contract 1.81445, the upstream config 1.655584931, diff +0.1589 (+9.60%)",
+    "  left_hip_roll_joint: contract 6.3088, the upstream config 5.792602062, diff +0.5162 (+8.91%)",
+    "  waist_yaw_joint: contract 1.81445, the upstream config 1.682005405, diff +0.1324 (+7.87%)",
+    "  left_shoulder_yaw_joint: contract 0.907223, the upstream config 0.8423577547, diff +0.06487 (+7.70%)",
+    "  left_hip_pitch_joint: contract 2.55789, the upstream config 2.770213604, diff -0.2123 (-7.66%)",
+    "  left_knee_joint: contract 6.3088, the upstream config 6.813812256, diff -0.505 (-7.41%)",
+    "  right_hip_roll_joint: contract 6.3088, the upstream config 6.79916954, diff -0.4904 (-7.21%)",
+    "  right_ankle_roll_joint: contract 1.81445, the upstream config 1.947354198, diff -0.1329 (-6.83%)",
+    "  left_shoulder_roll_joint: contract 0.907223, the upstream config 0.971396029, diff -0.06417 (-6.61%)",
+    "  left_hip_yaw_joint: contract 2.55789, the upstream config 2.413009644, diff +0.1449 (+6.00%)",
+    "  left_ankle_pitch_joint: contract 1.81445, the upstream config 1.713458896, diff +0.101 (+5.89%)",
+    "  right_hip_yaw_joint: contract 2.55789, the upstream config 2.42055583, diff +0.1373 (+5.67%)",
+    "  right_shoulder_yaw_joint: contract 0.907223, the upstream config 0.9585093856, diff -0.05129 (-5.35%)",
+    "  left_elbow_joint: contract 0.907223, the upstream config 0.8673850894, diff +0.03984 (+4.59%)",
+    "  right_hip_pitch_joint: contract 2.55789, the upstream config 2.681023359, diff -0.1231 (-4.59%)",
+    "  right_shoulder_roll_joint: contract 0.907223, the upstream config 0.8824035525, diff +0.02482 (+2.81%)",
+    "  right_shoulder_pitch_joint: contract 0.907223, the upstream config 0.9246640205, diff -0.01744 (-1.89%)",
+    "  right_elbow_joint: contract 0.907223, the upstream config 0.923692286, diff -0.01647 (-1.78%)",
+    "  right_knee_joint: contract 6.3088, the upstream config 6.215536594, diff +0.09327 (+1.50%)",
+    "  left_shoulder_pitch_joint: contract 0.907223, the upstream config 0.896725893, diff +0.0105 (+1.17%)",
+    "  left_ankle_roll_joint: contract 1.81445, the upstream config 1.807354331, diff +0.007092 (+0.39%)",
+    "unlisted pose: same on 8 joint(s)",
+    "unlisted kp: same on 8 joint(s)",
+    "unlisted kd: same on 8 joint(s)",
     "Port values against the policy's contract: no differences",
     "port: harness drives 8 joint(s) (hold), policy sees them as real: left_shoulder_pitch_joint, right_shoulder_pitch_joint, left_shoulder_roll_joint, right_shoulder_roll_joint, left_shoulder_yaw_joint, right_shoulder_yaw_joint ..."
-   ]
+   ],
+   "upstream": "policy.onnx metadata (checkpoint)"
   },
   {
    "name": "wty_cpp",
@@ -1467,6 +1546,6 @@
  "changes": [
   "The first audit ran at benchmark commit 6d331a8. There, schoi lost 85 s between its authors' config (90 s) and the port's values (4.7 s): the port contract held its waist at kp about 28, against 300 in the authors' config. The harness now holds every leg and waist motor at the policy's own gains (rhoyn/teleop-walking-benchmark@4ed23c2). schoi survives 25.7 s here and 31.5 s in the benchmark; what stops it now is the punches.",
   "The same harness fix moves zealot in the benchmark from 8.2 s to 67.6 s. gaitkeeper does not read zealot's adapter (see below), so it is not benched here.",
-  "nanog1 (right hip roll clamp) and homie (history start) were corrected upstream; nanog1's survival is unchanged, and homie is not read."
+  "nanog1 (right hip roll clamp) and homie (history start) were corrected upstream; nanog1's survival is unchanged, and homie is not read. nanog1 and wcompton, unclear in the first audit, now run their authors' configs (nanoG1's deploy_g1.py; the checkpoint's own metadata for wcompton): both fall within 4 s under them, so their scores belong to the policies, not the ports."
  ]
 }
