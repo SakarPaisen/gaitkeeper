@@ -51,8 +51,8 @@ tests need traces recorded with `tools/record_mjlab.py`.
   weights). Survival on the full benchmark tracks the benchmark's own MuJoCo numbers
   (Pearson 0.97, Spearman 0.94, n = 30) with the port contracts read from the adapters,
   none written by hand; over the 12 that last under 15 s it is 0.77, and against the
-  benchmark's PhysX numbers 0.96. The long survivors last a median of 11 s less here, all
-  of it under the punches. Per-policy verdicts, with the authors' config as a first stage
+  benchmark's PhysX numbers 0.96. The ten that last over 60 s in the benchmark last a
+  median of 11 s less here, all of it under the punches. Per-policy verdicts, with the authors' config as a first stage
   for ten of them, are in the
   [G1 Port Audit](https://dundysm.github.io/gaitkeeper/results/).
 

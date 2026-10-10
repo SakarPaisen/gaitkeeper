@@ -259,10 +259,20 @@ def page(d: dict) -> tuple[str, str]:
         else ""
     )
     long_text = (
-        f" Of the {ag['n_long']} that last over 60 s in the benchmark, {ag['n_long_less']} last "
-        f"less here (by a median of {ag['long_median']:.0f} s), and the difference is all in the "
-        "punches: every one of them survives the arm walk here."
+        f" The {ag['n_long']} that last over 60 s in the benchmark last a median of "
+        f"{ag['long_median']:.0f} s less here ({ag['n_long_less']} of them less), and the "
+        "difference is all in the punches: every one of them survives the arm walk here."
         if ag.get("n_long")
+        else ""
+    )
+    n_refused = sum(p.get("read") == "unsupported" for p in pols)
+    unbenched_read = [
+        p["name"] for p in pols if p.get("read") == "verified" and not p.get("stages")
+    ]
+    sunny_text = (
+        f", and {', '.join(unbenched_read)} {'reads' if len(unbenched_read) == 1 else 'read'} "
+        "but is not benched"
+        if unbenched_read
         else ""
     )
     total = float(d["tour_s"])
@@ -394,7 +404,7 @@ def page(d: dict) -> tuple[str, str]:
 {changes_html}
 <section>
   <h2>Not benched</h2>
-  <p style="color: var(--muted); font-size: .92rem">The reader probes an adapter by running it on the CPU and checks that gaitkeeper rebuilds its observation exactly. It refuses rather than guesses:</p>
+  <p style="color: var(--muted); font-size: .92rem">The reader probes an adapter by running it on the CPU and checks that gaitkeeper rebuilds its observation exactly; it refuses rather than guesses. {n_refused} adapters are refused{sunny_text}:</p>
   <div class="notread">{nr}</div>
 </section>
 
@@ -442,7 +452,7 @@ gaitkeeper bench --adapter twb/policies/gr00t_wbc/policy.cpp --variant gr00t_wbc
 
 <section>
   <h2>Help</h2>
-  <p>Ports with an open issue above are refused for one missing piece each. A verdict that looks wrong, a config gaitkeeper cannot read, or harness logs for a blind test are just as useful. <a href="https://github.com/dundysm/gaitkeeper/contribute">Good first issues</a> · <a href="https://github.com/dundysm/gaitkeeper/blob/main/CONTRIBUTING.md">Contributing</a> · <a href="https://github.com/dundysm/gaitkeeper/discussions">Discussions</a></p>
+  <p>A verdict that looks wrong, a config gaitkeeper cannot read, or harness logs for a blind test are all useful. <a href="https://github.com/dundysm/gaitkeeper/contribute">Good first issues</a> · <a href="https://github.com/dundysm/gaitkeeper/blob/main/CONTRIBUTING.md">Contributing</a> · <a href="https://github.com/dundysm/gaitkeeper/discussions">Discussions</a></p>
 </section>
 </div>
 """,

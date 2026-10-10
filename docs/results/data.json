@@ -10,8 +10,8 @@
    "port": "amo",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 75.74,
-   "benchmark_physx": 77.57,
+   "benchmark_mujoco": 75.737,
+   "benchmark_physx": 77.573,
    "benchmark_runs": 5120,
    "reason": "Two networks: an adapter network's output feeds the walking policy, which also keeps a 25-frame history in a second input; its input is not a robot state gaitkeeper can vary."
   },
@@ -21,7 +21,7 @@
    "variant": null,
    "read": "verified",
    "benchmark_mujoco": 45.64,
-   "benchmark_physx": 44.59,
+   "benchmark_physx": 44.593,
    "benchmark_runs": 512,
    "probe": {
     "obs": 500,
@@ -101,18 +101,18 @@
    "port": "bfm_zero",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 12.33,
-   "benchmark_physx": 10.14,
+   "benchmark_mujoco": 12.326,
+   "benchmark_physx": 10.135,
    "benchmark_runs": 512,
-   "reason": "Latent-conditioned: it loads a table of latents (written by the benchmark's export script) at start-up, and its input is not a velocity command."
+   "reason": "Latent-conditioned: it picks one of 12 latents (loaded at start-up from a file the benchmark's export script writes) by the velocity command, and feeds its network the latent, not the command."
   },
   {
    "name": "clobot",
    "port": "clobot",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 1.8,
-   "benchmark_physx": 1.78,
+   "benchmark_mujoco": 1.798,
+   "benchmark_physx": 1.781,
    "benchmark_runs": 512,
    "probe": {
     "obs": 500,
@@ -225,8 +225,8 @@
    "port": "decoupled_wbc",
    "variant": "decoupled_wbc_h066_p000",
    "read": "verified",
-   "benchmark_mujoco": 83.9,
-   "benchmark_physx": 81.31,
+   "benchmark_mujoco": 83.897,
+   "benchmark_physx": 81.308,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 116,
@@ -291,7 +291,7 @@
    "variant": "decoupled_wbc_h066_p012",
    "read": "verified",
    "benchmark_mujoco": 83.94,
-   "benchmark_physx": 80.94,
+   "benchmark_physx": 80.943,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 116,
@@ -355,8 +355,8 @@
    "port": "decoupled_wbc",
    "variant": "decoupled_wbc_h070_p000",
    "read": "verified",
-   "benchmark_mujoco": 83.15,
-   "benchmark_physx": 80.23,
+   "benchmark_mujoco": 83.147,
+   "benchmark_physx": 80.231,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 116,
@@ -420,8 +420,8 @@
    "port": "decoupled_wbc",
    "variant": "decoupled_wbc_h074_p000",
    "read": "verified",
-   "benchmark_mujoco": 82.26,
-   "benchmark_physx": 80.05,
+   "benchmark_mujoco": 82.256,
+   "benchmark_physx": 80.051,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 116,
@@ -485,8 +485,8 @@
    "port": "dm_agile",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 5.19,
-   "benchmark_physx": 3.44,
+   "benchmark_mujoco": 5.192,
+   "benchmark_physx": 3.444,
    "benchmark_runs": 512,
    "probe": {
     "obs": 480,
@@ -573,8 +573,8 @@
    "port": "dm_march",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 6.42,
-   "benchmark_physx": 4.02,
+   "benchmark_mujoco": 6.415,
+   "benchmark_physx": 4.022,
    "benchmark_runs": 512,
    "probe": {
     "obs": 490,
@@ -666,8 +666,8 @@
    "port": "falcon",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 36.84,
-   "benchmark_physx": 35.79,
+   "benchmark_mujoco": 36.839,
+   "benchmark_physx": 35.795,
    "benchmark_runs": 512,
    "probe": {
     "obs": 102,
@@ -744,8 +744,8 @@
    "port": "g1_gym",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 2.46,
-   "benchmark_physx": 1.92,
+   "benchmark_mujoco": 2.459,
+   "benchmark_physx": 1.916,
    "benchmark_runs": 512,
    "probe": {
     "obs": 90,
@@ -841,8 +841,8 @@
    "port": "gr00t_wbc",
    "variant": "gr00t_wbc_h066_p000",
    "read": "verified",
-   "benchmark_mujoco": 84.73,
-   "benchmark_physx": 81.82,
+   "benchmark_mujoco": 84.728,
+   "benchmark_physx": 81.821,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 516,
@@ -908,8 +908,8 @@
    "port": "gr00t_wbc",
    "variant": "gr00t_wbc_h066_p012",
    "read": "verified",
-   "benchmark_mujoco": 84.94,
-   "benchmark_physx": 82.2,
+   "benchmark_mujoco": 84.937,
+   "benchmark_physx": 82.203,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 516,
@@ -975,8 +975,8 @@
    "port": "gr00t_wbc",
    "variant": "gr00t_wbc_h070_p000",
    "read": "verified",
-   "benchmark_mujoco": 83.27,
-   "benchmark_physx": 82.9,
+   "benchmark_mujoco": 83.265,
+   "benchmark_physx": 82.898,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 516,
@@ -1042,7 +1042,7 @@
    "port": "gr00t_wbc",
    "variant": "gr00t_wbc_h074_p000",
    "read": "verified",
-   "benchmark_mujoco": 80.1,
+   "benchmark_mujoco": 80.097,
    "benchmark_physx": 80.03,
    "benchmark_runs": 5120,
    "probe": {
@@ -1109,8 +1109,8 @@
    "port": "handoff",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 21.32,
-   "benchmark_physx": 22.82,
+   "benchmark_mujoco": 21.318,
+   "benchmark_physx": 22.823,
    "benchmark_runs": 512,
    "probe": {
     "obs": 1272,
@@ -1211,8 +1211,8 @@
    "port": "holosoma",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 5.8,
-   "benchmark_physx": 6.37,
+   "benchmark_mujoco": 5.796,
+   "benchmark_physx": 6.372,
    "benchmark_runs": 512,
    "probe": {
     "obs": 100,
@@ -1301,8 +1301,8 @@
    "port": "homie",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 78.2,
-   "benchmark_physx": 77.39,
+   "benchmark_mujoco": 78.202,
+   "benchmark_physx": 77.387,
    "benchmark_runs": 5120,
    "probe": {
     "obs": 456,
@@ -1372,8 +1372,8 @@
    "port": "huru",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 7.77,
-   "benchmark_physx": 7.95,
+   "benchmark_mujoco": 7.771,
+   "benchmark_physx": 7.951,
    "benchmark_runs": 512,
    "probe": {
     "obs": 99,
@@ -1452,8 +1452,8 @@
    "port": "josabb",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 10.11,
-   "benchmark_physx": 10.05,
+   "benchmark_mujoco": 10.113,
+   "benchmark_physx": 10.054,
    "benchmark_runs": 512,
    "reason": "41 actions, 12 of them hand joints the benchmark's G1 model does not have."
   },
@@ -1462,8 +1462,8 @@
    "port": "legged_rl_lab",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 3.93,
-   "benchmark_physx": 3.86,
+   "benchmark_mujoco": 3.931,
+   "benchmark_physx": 3.858,
    "benchmark_runs": 512,
    "probe": {
     "obs": 96,
@@ -1522,7 +1522,7 @@
    },
    "seconds": 90.0,
    "cause": "arms",
-   "verdict": "Stands and tracks in its own setup (87 s); the harness taking the arms costs 78 s.",
+   "verdict": "Lasts 87 s in its own setup (9/10 complete); the harness taking the arms costs 78 s.",
    "notes": [
     "The port alone, arms still and no punches, costs 78 s."
    ],
@@ -1545,8 +1545,8 @@
    "port": "mimic_lite",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 48.08,
-   "benchmark_physx": 59.55,
+   "benchmark_mujoco": 48.077,
+   "benchmark_physx": 59.546,
    "benchmark_runs": 512,
    "reason": "A motion-tracking stack (a planner network feeding an actor), not a velocity-command walker."
   },
@@ -1555,8 +1555,8 @@
    "port": "mturan33",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 2.83,
-   "benchmark_physx": 4.26,
+   "benchmark_mujoco": 2.828,
+   "benchmark_physx": 4.256,
    "benchmark_runs": 512,
    "reason": "Observes Euler angles computed from the base quaternion, read in the wrong component order (its roll reads pi when upright)."
   },
@@ -1565,8 +1565,8 @@
    "port": "nanog1",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 2.13,
-   "benchmark_physx": 2.18,
+   "benchmark_mujoco": 2.126,
+   "benchmark_physx": 2.177,
    "benchmark_runs": 512,
    "probe": {
     "obs": 98,
@@ -1667,8 +1667,8 @@
    "port": "openwbt",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 26.79,
-   "benchmark_physx": 40.58,
+   "benchmark_mujoco": 26.793,
+   "benchmark_physx": 40.583,
    "benchmark_runs": 512,
    "probe": {
     "obs": 47,
@@ -1746,7 +1746,7 @@
    "variant": null,
    "read": "verified",
    "benchmark_mujoco": 19.72,
-   "benchmark_physx": 37.7,
+   "benchmark_physx": 37.704,
    "benchmark_runs": 512,
    "probe": {
     "obs": 47,
@@ -1806,7 +1806,7 @@
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (72 s); the random arm walk costs 53 s.",
+   "verdict": "Lasts 72 s in its own setup (4/10 complete); the random arm walk costs 53 s.",
    "notes": [
     "The port's values cost 18 s against the authors' config (90 to 72.1 s)."
    ],
@@ -1830,8 +1830,8 @@
    "port": "rl_lab",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 25.37,
-   "benchmark_physx": 22.15,
+   "benchmark_mujoco": 25.367,
+   "benchmark_physx": 22.147,
    "benchmark_runs": 512,
    "probe": {
     "obs": 480,
@@ -1890,7 +1890,7 @@
    },
    "seconds": 90.0,
    "cause": "walk",
-   "verdict": "Stands and tracks in its own setup (90 s); the random arm walk costs 80 s.",
+   "verdict": "Lasts 90 s in its own setup (9/10 complete); the random arm walk costs 80 s.",
    "notes": [
     "The port survives 26 s longer than the clean contract under the full benchmark: it hides the arm motion from the policy."
    ],
@@ -1913,7 +1913,7 @@
    "port": "rl_mjlab",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 5.57,
+   "benchmark_mujoco": 5.573,
    "benchmark_physx": 5.31,
    "benchmark_runs": 512,
    "probe": {
@@ -1998,8 +1998,8 @@
    "port": "robomimic",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 45.14,
-   "benchmark_physx": 42.54,
+   "benchmark_mujoco": 45.144,
+   "benchmark_physx": 42.539,
    "benchmark_runs": 512,
    "probe": {
     "obs": 96,
@@ -2073,7 +2073,7 @@
    "variant": null,
    "read": "unsupported",
    "benchmark_mujoco": 51.68,
-   "benchmark_physx": 48.11,
+   "benchmark_physx": 48.109,
    "benchmark_runs": 512,
    "reason": "Two networks (a motion generator and a residual actor)."
   },
@@ -2082,8 +2082,8 @@
    "port": "schoi",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 31.54,
-   "benchmark_physx": 28.83,
+   "benchmark_mujoco": 31.541,
+   "benchmark_physx": 28.826,
    "benchmark_runs": 512,
    "probe": {
     "obs": 47,
@@ -2165,18 +2165,18 @@
    "port": "sonic",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 68.5,
-   "benchmark_physx": 52.86,
+   "benchmark_mujoco": 68.497,
+   "benchmark_physx": 52.863,
    "benchmark_runs": 512,
-   "reason": "A motion-tracking stack (a planner network feeding an actor), not a velocity-command walker."
+   "reason": "A motion-tracking stack (a planner network and an encoder-decoder pair), not a velocity-command walker."
   },
   {
    "name": "stepdown",
    "port": "stepdown",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 2.08,
-   "benchmark_physx": 1.86,
+   "benchmark_mujoco": 2.081,
+   "benchmark_physx": 1.859,
    "benchmark_runs": 512,
    "probe": {
     "obs": 47,
@@ -2260,8 +2260,8 @@
    "port": "sunny",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 7.31,
-   "benchmark_physx": 7.88,
+   "benchmark_mujoco": 7.306,
+   "benchmark_physx": 7.876,
    "benchmark_runs": 512,
    "reason": "Reads, and its observation matches the adapter's; its weights are not published, so it is not benched.",
    "probe": {
@@ -2292,8 +2292,8 @@
    "port": "wbc_agile",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 70.94,
-   "benchmark_physx": 64.26,
+   "benchmark_mujoco": 70.943,
+   "benchmark_physx": 64.263,
    "benchmark_runs": 512,
    "reason": "Builds its network through TensorRT's own API from the ONNX weights instead of the benchmark's engine interface, so it does not build for the CPU."
   },
@@ -2302,8 +2302,8 @@
    "port": "wbc_agile_velocity",
    "variant": null,
    "read": "unsupported",
-   "benchmark_mujoco": 75.1,
-   "benchmark_physx": 79.28,
+   "benchmark_mujoco": 75.099,
+   "benchmark_physx": 79.279,
    "benchmark_runs": 5120,
    "reason": "Feeds its graph twelve inputs (raw joint states, a quaternion built from gravity) and keeps its observation history inside the graph, fed back from its outputs; gaitkeeper feeds one observation input."
   },
@@ -2312,8 +2312,8 @@
    "port": "wcompton",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 2.5,
-   "benchmark_physx": 2.21,
+   "benchmark_mujoco": 2.505,
+   "benchmark_physx": 2.206,
    "benchmark_runs": 512,
    "probe": {
     "obs": 74,
@@ -2445,8 +2445,8 @@
    "port": "wty_cpp",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 34.09,
-   "benchmark_physx": 35.09,
+   "benchmark_mujoco": 34.093,
+   "benchmark_physx": 35.094,
    "benchmark_runs": 512,
    "probe": {
     "obs": 480,
@@ -2536,8 +2536,8 @@
    "port": "zealot",
    "variant": null,
    "read": "verified",
-   "benchmark_mujoco": 67.64,
-   "benchmark_physx": 62.03,
+   "benchmark_mujoco": 67.641,
+   "benchmark_physx": 62.028,
    "benchmark_runs": 512,
    "probe": {
     "obs": 265,
@@ -2625,7 +2625,7 @@
   "The first audit ran at benchmark commit 6d331a8. There, schoi lost 85 s between its authors' config (90 s) and the port's values (4.7 s): the port contract held its waist at kp about 28, against 300 in the authors' config. The harness now holds every leg and waist motor at the policy's own gains (rhoyn/teleop-walking-benchmark@4ed23c2), and what stops schoi now is the punches.",
   "The same harness fix moves zealot in the benchmark from 8.2 s to 67.6 s. zealot is now read too: it observes the action from two steps back, joint velocities by difference, a gait clock whose period follows the command speed, and a command it steers itself toward the waypoint.",
   "nanog1 (right hip roll clamp) and homie (history start) were corrected upstream. nanog1 and wcompton, unclear in the first audit, now run their authors' configs (nanoG1's deploy_g1.py; the checkpoint's own metadata for wcompton): both fall within 4 s under them, so their scores belong to the policies, not the ports.",
-  "Fifteen more ports and variants are read, each rebuilt to 1e-6 or better on random inputs: decoupled_wbc and gr00t_wbc (four variants each; gr00t_wbc switches between its walking and balance networks by the command), homie, falcon, openwbt, asap and handoff, and holosoma's observation now matches its adapter. What they needed: observed joints no action drives, the harness's arm targets, commands a port steers or gates itself (by distance, by a walk latch, by size, after a warm-up), gait clocks that stop or warp, and layouts no single history window describes.",
+  "Thirteen more ports and variants are read, each rebuilt to 1e-6 or better on random inputs: decoupled_wbc and gr00t_wbc (four variants each; gr00t_wbc switches between its walking and balance networks by the command), homie, falcon, openwbt, asap and handoff; and holosoma's observation now matches its adapter. What they needed: observed joints no action drives, the harness's arm targets, commands a port steers or gates itself (by distance, by a walk latch, by size, after a warm-up), gait clocks that stop or warp, and layouts no single history window describes.",
   "Every stage now runs 10 seeds (3 before)."
  ],
  "pearson": 0.974,
