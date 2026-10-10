@@ -64,6 +64,9 @@ class Push:
     # where on the body the force acts, in the body's frame (a joint's anchor, as the
     # benchmark's punches land); None is the centre of mass, no torque about it
     point: tuple[float, float, float] | None = None
+    # the body whose frame ``vector`` is given in, turning with it while the push lasts (the
+    # benchmark's punches are fixed in a link's frame); None is the world frame
+    frame: str | None = None
 
 
 @dataclass
@@ -660,7 +663,7 @@ class Runner:
         pushes = sorted(cfg.pushes, key=lambda p: p.t)
         gen = cfg.push_generator
         next_gen = gen.first_s if gen and (gen.force > 0 or gen.velocity > 0) else math.inf
-        active: list[tuple[int, np.ndarray, float, np.ndarray | None]] = []
+        active: list[tuple[int, np.ndarray, float, np.ndarray | None, int]] = []
         applied: list[dict[str, Any]] = []
         tau = np.zeros(n)
         tau_sq = np.zeros(n)
@@ -805,7 +808,11 @@ class Runner:
                 tnow = time + s * b.timestep
                 d.xfrc_applied[:] = 0.0
                 active = [a_ for a_ in active if tnow < a_[2] - 1e-12]
-                for bid, f, _, pt in active:
+                world = []
+                for bid, f, _, pt, fid in active:
+                    if fid >= 0:  # fixed in a body's frame: turns with it
+                        f = d.xmat[fid].reshape(3, 3) @ f
+                    world.append(f)
                     d.xfrc_applied[bid, :3] += f
                     if pt is not None:  # off the centre of mass: the torque about it too
                         arm = d.xmat[bid].reshape(3, 3) @ pt + d.xpos[bid] - d.xipos[bid]
@@ -817,9 +824,7 @@ class Runner:
                     plog["step"].append(t)
                     plog["substep"].append(s)
                     plog["time"].append(tnow)
-                    plog["xfrc"].append(
-                        np.sum([a_[1] for a_ in active], axis=0) if active else np.zeros(3)
-                    )
+                    plog["xfrc"].append(np.sum(world, axis=0) if world else np.zeros(3))
                     bodies = {a_[0] for a_ in active}
                     if len(bodies) > 1:
                         raise ValueError("physics log: concurrent pushes on two bodies")
@@ -917,14 +922,23 @@ class Runner:
         if bid < 0:
             raise KeyError(f"push body {name!r} not in the model")
         pt = None if p.point is None else np.asarray(p.point, dtype=float)
-        active.append((bid, np.asarray(p.vector, dtype=float), time + p.duration, pt))
-        return {
-            "t": time,
-            "kind": "force",
-            "body": m.body(bid).name,
-            "vector": [float(x) for x in p.vector],
-            "duration": p.duration,
-        } | ({"point": [float(x) for x in p.point]} if p.point is not None else {})
+        fid = -1
+        if p.frame is not None:
+            fid = find_id(m, mujoco.mjtObj.mjOBJ_BODY, p.frame)
+            if fid < 0:
+                raise KeyError(f"push frame {p.frame!r} not in the model")
+        active.append((bid, np.asarray(p.vector, dtype=float), time + p.duration, pt, fid))
+        return (
+            {
+                "t": time,
+                "kind": "force",
+                "body": m.body(bid).name,
+                "vector": [float(x) for x in p.vector],
+                "duration": p.duration,
+            }
+            | ({"point": [float(x) for x in p.point]} if p.point is not None else {})
+            | ({"frame": p.frame} if p.frame is not None else {})
+        )
 
     def to_trace(self, res: RunResult, meta: dict[str, Any] | None = None, kind: str = "harness"):
         """Trace of a recorded run, harness format by default. Marked as written by

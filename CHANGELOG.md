@@ -51,7 +51,17 @@
   random motor's joint, at the joint's anchor, so the force also twists the link about its
   centre of mass (mjwarp_capture.py `k_punch_apply`). They were applied at the centre of
   mass, which cost the long-surviving policies more than the benchmark's punches do.
-  `Push.point` places any force push off the centre of mass.
+  `Push.point` places any force push off the centre of mass. The direction is fixed in the
+  child link's frame or its parent's and turns with that link while the punch lasts
+  (`Push.frame`); it was fixed in the world.
+* Seed n of the benchmark tour is the benchmark's run id n. The tour, the punches and the
+  arm walk draw from the benchmark's own random streams (its std::mt19937 and seed_seq,
+  reproduced in `BenchRandom`), the same numbers in the same order, so a run here pairs
+  with that run's row in the benchmark's results. The arm walk now also redraws a target
+  that puts a hand behind where it is at STANCE or above the bottom of the head, up to 8
+  times, as the benchmark does (`BenchHands`), and moves on the benchmark's control clock.
+  Checked against the benchmark's C++ compiled from its source: the waypoints and arm
+  targets of run ids 0 to 63 are bit-identical.
 * Adapters run from a sandbox that links the benchmark's `policies/`, so ports that read
   or patch their model files at start (handoff, wbc_agile_velocity) construct; what they
   write stays out of the checkout. TensorRT's version macros are defined for ports that

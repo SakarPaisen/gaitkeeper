@@ -118,6 +118,29 @@ def test_a_push_off_the_centre_of_mass_also_twists(url):
     assert abs(spin[1] - spin[0]) > 0.05
 
 
+def test_a_push_fixed_in_a_links_frame_turns_with_it(url):
+    """The benchmark's punch direction is fixed in a link's frame: with the robot turned 90
+    degrees, a push along the pelvis's x lands along the world's y."""
+    import math
+
+    r = _runner(url)
+    for frame, axis in ((None, 0), ("pelvis", 1)):
+        res = r.run(
+            RunConfig(
+                seconds=1.1,
+                yaw0=math.pi / 2,
+                record=True,
+                physics=True,
+                pushes=[Push(1.0, "force", (60.0, 0.0, 0.0), "torso_link", 0.1, None, frame)],
+            )
+        )
+        f = res.log["p/xfrc"]
+        f = f[np.linalg.norm(f, axis=1) > 0]
+        assert len(f) > 0 and np.allclose(np.linalg.norm(f, axis=1), 60.0)
+        assert np.all(np.abs(f[:, axis]) > 55.0)
+        assert ("frame" in res.pushes[0]) == (frame is not None)
+
+
 def _legs_only(c, unlisted):
     """The contract restricted to its first 15 policy joints in MuJoCo order (legs, waist)."""
     import copy
