@@ -49,9 +49,9 @@ tests need traces recorded with `tools/record_mjlab.py`.
   rebuilds matching the adapter's on random inputs (a check of the reading, not of the
   policy). 16 are benched: 15 of those (sunny has no published weights) and holosoma, which
   reads but whose stand-reset clock does not match. Survival on the full benchmark tracks
-  the benchmark's own MuJoCo numbers (Pearson 0.94, Spearman 0.89, n = 16) with the port
+  the benchmark's own MuJoCo numbers (Pearson 0.92, Spearman 0.89, n = 16) with the port
   contracts read from the adapters, none written by hand. Three long-surviving ports carry
-  much of the Pearson: over the 13 that last under 15 s it is 0.67; against the benchmark's
+  much of the Pearson: over the 12 that last under 15 s it is 0.65; against the benchmark's
   PhysX numbers it is 0.81. Per-policy verdicts, with the authors'
   config as a first stage for eight of them, are in the
   [G1 Port Audit](https://dundysm.github.io/gaitkeeper/results/).

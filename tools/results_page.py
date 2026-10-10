@@ -229,6 +229,13 @@ def agreement(d: dict) -> dict:
 def page(d: dict) -> tuple[str, str]:
     pols = d["policies"]
     ag = agreement(d)
+    changes_html = ""
+    if d.get("changes"):
+        items = "".join(f"<li>{c}</li>" for c in d["changes"])
+        changes_html = (
+            "<section>\n  <h2>Since the last audit</h2>\n"
+            f'  <ul style="font-size: .92rem">{items}</ul>\n</section>\n'
+        )
     physx_text = (
         f" Against the benchmark&#8217;s PhysX runs ({ag['n_physx']} policies) it is "
         f"{ag['pearson_physx']:.2f}."
@@ -354,6 +361,7 @@ def page(d: dict) -> tuple[str, str]:
   </div>
 </section>
 
+{changes_html}
 <section>
   <h2>Not benched</h2>
   <p style="color: var(--muted); font-size: .92rem">The reader probes an adapter by running it on the CPU and checks that gaitkeeper rebuilds its observation exactly. It refuses rather than guesses:</p>
@@ -376,7 +384,7 @@ def page(d: dict) -> tuple[str, str]:
 <section>
   <h2>Reproduce</h2>
 <pre>pip install "gaitkeeper[sim]=={e(d["gaitkeeper"])}"
-git clone https://github.com/rhoyn/teleop-walking-benchmark twb   # at 6d331a8
+git clone https://github.com/rhoyn/teleop-walking-benchmark twb   # at 106faa0
 
 git clone https://github.com/unitreerobotics/unitree_rl_gym   # rl_gym's authors' config
 
