@@ -15,7 +15,7 @@
   (`gait_phase_legs` with `params.stand`: the thresholds on planar and yaw speed, the phases
   it holds at and the phases it restarts from, all measured). holosoma now matches its
   adapter to 6e-8.
-* More of teleop-walking-benchmark's ports read, each matching its adapter to 1e-7 or
+* More of teleop-walking-benchmark's ports read, each matching its adapter to 1e-6 or
   better on random inputs:
   * decoupled_wbc and gr00t_wbc, made by name (`--variant`; `gaitkeeper adapter` reads every
     variant when none is named). gr00t_wbc runs a walking and a standing graph picked by the
