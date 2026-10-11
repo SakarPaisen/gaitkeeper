@@ -429,7 +429,17 @@ def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
         if r.returncode != 0:
             lines = [ln for ln in r.stderr.splitlines() if "error" in ln][:8]
             raise RuntimeError(f"compiling {policy_cpp} for the CPU failed:\n" + "\n".join(lines))
-        os.replace(tmp, lib)
+        try:
+            os.replace(tmp, lib)
+        except PermissionError:
+            # Two processes compiled the same key at once. On Windows, replacing the
+            # destination fails while the other process holds it open, where POSIX
+            # `rename` would just win. The loser's work is identical and the winner's
+            # library is already in place, so a completed `lib` is success, not an error.
+            if not lib.exists():
+                raise
+            tmp.unlink(missing_ok=True)
+            return lib
     finally:
         cpp.unlink(missing_ok=True)
         tmp.unlink(missing_ok=True)
