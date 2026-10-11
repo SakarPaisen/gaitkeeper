@@ -130,7 +130,7 @@ motion and punches):
 
 For the unitree_rl_lab G1 policy on unitree_mujoco's scene it finds a dead zone below
 0.2 m/s and no turning in place, survives the tour with its own arms (90 of 90 s), and
-lasts about 11 s once the arms are moved at random. When it falls with nothing added, the next
+lasts about 6 s once the arms are moved at random. When it falls with nothing added, the next
 step is `gaitkeeper bench --upstream <the authors' config>` to separate the port from the
 policy, or a golden trace and `gaitkeeper verify` for a cause.
 
@@ -193,12 +193,12 @@ gaitkeeper bench --adapter policies/rl_gym/policy.cpp --onnx policies/rl_gym/mod
 ```text
   stage                                      survival  complete  pos err  yaw err
   upstream config (as trained or deployed)    90.0 s     3/3       13 cm    3 deg
-  own setup                                  78.2 s     1/3       40 cm    8 deg
-  harness walks the arms                    22.4 s     0/3      138 cm   13 deg
-  plus punches (full benchmark)              9.8 s     0/3      171 cm   22 deg
-Finding   the random arm walk costs 55.8 s of mean survival (78.2 -> 22.4 s)
+  own setup                                 52.0 s     1/3       67 cm    8 deg
+  harness walks the arms                    50.6 s     0/3       65 cm   11 deg
+  plus punches (full benchmark)             26.2 s     0/3       23 cm    6 deg
 Finding   switching from the upstream config to the policy's contract here (gains, poses,
-          observation) costs 11.8 s of mean survival (90.0 -> 78.2 s)
+          observation) costs 38.0 s of mean survival (90.0 -> 52.0 s)
+Finding   punching costs 24.5 s of mean survival (50.6 -> 26.2 s)
 phase clock: contract runs -1 policy steps (-20 ms, -9 deg of a 0.8 s gait) ahead of training
 unlisted kp: 17 of 17 joint(s) differ; largest left_elbow_joint contract 14.25 against 500
 ```
