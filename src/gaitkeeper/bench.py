@@ -301,15 +301,40 @@ def run_bench(
                     "the policy contract's controller, so the two runs differ only in values",
                 )
                 filled.append(k)
+        # The physics step too: the runner holds torque over sim_dt when one is stated, so a
+        # stated and an unstated one run differently.
+        sd_mine, sd_theirs = (
+            contract.get("timing.sim_dt", None),
+            upstream.get("timing.sim_dt", None),
+        )
+        if sd_theirs != sd_mine:
+
+            def _step(v: Any) -> str:
+                return "one MuJoCo step" if v is None else f"{float(v) * 1e3:g} ms"
+
+            upstream.set(
+                "timing.sim_dt",
+                sd_mine,
+                "default",
+                f"was {sd_theirs}: the bench contract's physics step",
+            )
+            swapped.append(f"physics step {_step(sd_theirs)} -> {_step(sd_mine)}")
+        # The tour's command limits are the harness's, not the policy's config: the upstream
+        # stage runs the same tour.
         lim = "policy_io.commands.base_velocity.limit"
-        if upstream.get(lim, None) is None and contract.get(lim, None) is not None:
-            upstream.set(lim, contract.get(lim), "default", "the bench contract's command limits")
-            filled.append("command limits")
+        mine, theirs = contract.get(lim, None), upstream.get(lim, None)
+        if mine is not None and theirs != mine:
+            upstream.set(lim, mine, "default", "the bench contract's command limits")
+            if theirs is None:
+                filled.append("command limits")
+            else:
+                swapped.append("command limits")
         if swapped:
             rep.notes.append(
-                "the upstream config trained with another drive ("
+                "the upstream config states another drive or tour setting ("
                 + ", ".join(swapped)
-                + "): run with the bench contract's, so the stages differ only in values"
+                + "): run with the bench contract's, so the stages differ only in the "
+                "policy's values"
             )
         if filled:
             rep.notes.append(

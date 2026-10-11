@@ -69,6 +69,10 @@
   default pose. A run ends when the pelvis is below 0.2 m (`TourOptions.fall`,
   `RunConfig.fall_z`, `--fall`); it ended once the robot was low or tilted past 1 rad,
   which read falls about half a second early.
+* `bench` runs the upstream stage at the bench contract's physics step and command limits,
+  so it differs from the policy's own setup only in the policy's values. A training
+  `sim_dt` in the upstream config (Isaac Lab's env.yaml states one) made the runner hold
+  torque over that step at another timestep, and its command ranges changed the tour.
 * Adapters run from a sandbox that links the benchmark's `policies/`, so ports that read
   or patch their model files at start (handoff, wbc_agile_velocity) construct; what they
   write stays out of the checkout. TensorRT's version macros are defined for ports that

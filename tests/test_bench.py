@@ -141,3 +141,36 @@ def test_doctor_reads_a_config_by_content_and_runs_the_checks(tmp_path, capsys):
     d = json.loads(out.read_text())
     assert d["command"] == "doctor" and d["dead_zones"]
     assert code == 5  # dead zones: not a clean bill
+
+
+def test_upstream_stage_runs_the_bench_contracts_physics_step_and_command_limits(monkeypatch):
+    """The upstream stage differs from the policy's contract only in the policy's values: a
+    stated training sim_dt or command range would change the drive or the tour."""
+    from assets import URL_G1, need
+
+    need(URL_G1 / "deploy.yaml")
+    import gaitkeeper.bench as B
+    from gaitkeeper.readers.unitree_deploy import read_unitree_deploy
+
+    c, _ = read_unitree_deploy(URL_G1 / "deploy.yaml", URL_G1 / "policy.onnx")
+    c.set(
+        "policy_io.commands.base_velocity.limit",
+        {"vx": [-0.5, 1.0], "vy": [-0.3, 0.3], "wz": [-0.2, 0.2]},
+    )
+    up = c.copy()
+    up.set("timing.sim_dt", 0.005)
+    up.set("policy_io.commands.base_velocity.limit", {"vx": [-1, 2], "vy": [-1, 1], "wz": [-1, 1]})
+    seen = {}
+
+    def fake(contract, mjcf, path, seeds, o, workers):
+        seen[len(seen)] = contract
+        return {"runs": [], "seconds": 1.0, "mean_survival_s": 1.0, "complete": 0}
+
+    monkeypatch.setattr(B, "run_tour", fake)
+    rep = B.run_bench(c, "scene.xml", "p.onnx", [0], upstream=up, stages=["own"])
+    first = seen[0]
+    assert first.get("timing.sim_dt", None) == c.get("timing.sim_dt", None)
+    assert first.get("policy_io.commands.base_velocity.limit") == c.get(
+        "policy_io.commands.base_velocity.limit"
+    )
+    assert any("physics step 5 ms" in n and "command limits" in n for n in rep.notes)
