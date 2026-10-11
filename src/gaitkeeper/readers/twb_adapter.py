@@ -19,6 +19,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import uuid
 from pathlib import Path
 
@@ -384,6 +385,16 @@ def _cache_dir() -> Path:
     return d
 
 
+def _lib_suffix() -> str:
+    """The shared-library suffix this platform loads.
+
+    `ctypes.CDLL` on Windows wants a `.pyd` (a DLL with that name); `.so` is
+    the ELF/Mach-O name everywhere else. Hardcoding `.so` left Windows with a
+    file `CDLL` refused to open.
+    """
+    return ".pyd" if sys.platform == "win32" else ".so"
+
+
 def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
     """Compile the adapter with the CPU shim; returns the shared library's path."""
     src = Path(policy_cpp).read_text()
@@ -395,7 +406,8 @@ def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
     code = _PROLOGUE + "\n" + body + defs + _EPILOGUE
     key = hashlib.sha256((code + "v1").encode()).hexdigest()[:16]
     d = _cache_dir()
-    lib = d / f"{ns}_{cls}_{key}.so"
+    suffix = _lib_suffix()
+    lib = d / f"{ns}_{cls}_{key}{suffix}"
     if lib.exists():
         return lib
     # Compile under names unique to this process, then move the library into place in one
@@ -403,7 +415,7 @@ def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
     # is killed leaves only a temporary that is never reused.
     tag = f".{os.getpid()}.{uuid.uuid4().hex[:8]}"
     cpp = d / f"{ns}_{cls}_{key}{tag}.cpp"
-    tmp = d / f"{ns}_{cls}_{key}{tag}.so.part"
+    tmp = d / f"{ns}_{cls}_{key}{tag}{suffix}.part"
     cpp.write_text(code)
     cmd = [_compiler(), "-std=c++17", "-O1", "-shared", "-fPIC", "-w", str(cpp), "-o", str(tmp)]
     try:
