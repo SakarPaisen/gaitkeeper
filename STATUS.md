@@ -77,7 +77,33 @@ tests need traces recorded with `tools/record_mjlab.py`.
   redistributed. unitree_mujoco and MuJoCo Menagerie are BSD-3-Clause.
 * One heavy mjlab job at a time on a 15 GB machine.
 
+## Done in 0.5.2 (October 10 to 11, 2026)
+
+* Benchmark tours reproduce rhoyn/teleop-walking-benchmark run for run: its random draws
+  (seed n is its run id n), its punches, its arm walk with the hand check, its 3 s crane
+  start and its 0.2 m fall line. 212 of 300 runs end within 1 s of the same run in the
+  benchmark's MuJoCo results.
+* 31 of its 40 ports and variants read from their adapters; 30 benched at 10 seeds; the
+  [G1 Port Audit](https://dundysm.github.io/gaitkeeper/results/) is published, and the
+  results were sent to the benchmark's authors first (they did not review the verdicts).
+* Released on PyPI and GitHub; the audit announced on unitree_rl_lab issue 145.
+
 ## What is left
+
+Next, in order:
+
+* **PR #16** (doctor markdown report): blocked on one test, its Windows path case, which
+  fails on Linux. A check-in is scheduled for Monday October 12: merge once it is fixed,
+  or merge and fix the test in a follow-up commit.
+* **mturan33.** Its port is faithful to its training, which reads the root quaternion
+  (w, x, y, z) as (x, y, z, w) for its roll, pitch and yaw. A term for euler angles from
+  the base quaternion with a stated component order would make it the 32nd port read.
+* **wty_cpp.** The one port rated well above the benchmark: 71 s here, 42 s in its MuJoCo
+  and 33 s in its PhysX. In runs 3, 6 and 7 it falls about 1.3 s after the 5.1 s punch
+  there and survives it here. Not explained by inference precision (1e-3 noise changes
+  nothing); the cause is open.
+* **More ports.** wbc_agile_velocity (twelve graph inputs, history kept in the graph) and
+  amo (two networks) are the next refused ports worth reading.
 
 * **Golden traces.** Publishing the mjlab and Isaac Lab traces (about 126 MB each) as a
   Hugging Face dataset for `gaitkeeper fetch golden`. Waits on a license: they contain
