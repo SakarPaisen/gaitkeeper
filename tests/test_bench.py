@@ -167,10 +167,18 @@ def test_upstream_stage_runs_the_bench_contracts_physics_step_and_command_limits
         return {"runs": [], "seconds": 1.0, "mean_survival_s": 1.0, "complete": 0}
 
     monkeypatch.setattr(B, "run_tour", fake)
-    rep = B.run_bench(c, "scene.xml", "p.onnx", [0], upstream=up, stages=["own"])
+    from assets import UMJ_G1
+
+    need(UMJ_G1)
+    rep = B.run_bench(c, str(UMJ_G1), "p.onnx", [0], upstream=up, stages=["own"])
     first = seen[0]
     assert first.get("timing.sim_dt", None) == c.get("timing.sim_dt", None)
     assert first.get("policy_io.commands.base_velocity.limit") == c.get(
         "policy_io.commands.base_velocity.limit"
     )
     assert any("physics step 5 ms" in n and "command limits" in n for n in rep.notes)
+    # a stated step equal to the model's is no change
+    up.set("timing.sim_dt", 0.002)
+    seen.clear()
+    rep = B.run_bench(c, str(UMJ_G1), "p.onnx", [0], upstream=up, stages=["own"])
+    assert not any("physics step" in n for n in rep.notes)

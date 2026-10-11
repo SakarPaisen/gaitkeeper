@@ -318,7 +318,19 @@ def run_bench(
                 "default",
                 f"was {sd_theirs}: the bench contract's physics step",
             )
-            swapped.append(f"physics step {_step(sd_theirs)} -> {_step(sd_mine)}")
+            # an unstated sim_dt is one MuJoCo step: no change when the stated one equals it
+            stated = sd_theirs if sd_mine is None else sd_mine
+            same_step = False
+            if sd_mine is None or sd_theirs is None:
+                import mujoco
+
+                try:
+                    h0 = float(mujoco.MjModel.from_xml_path(str(mjcf)).opt.timestep)
+                    same_step = abs(float(stated) - h0) <= 1e-12
+                except ValueError:  # no model to read the step from: say it changed
+                    pass
+            if not same_step:
+                swapped.append(f"physics step {_step(sd_theirs)} -> {_step(sd_mine)}")
         # The tour's command limits are the harness's, not the policy's config: the upstream
         # stage runs the same tour.
         lim = "policy_io.commands.base_velocity.limit"
