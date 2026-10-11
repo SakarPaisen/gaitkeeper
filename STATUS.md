@@ -94,7 +94,10 @@ Next, in order:
 
 * **mturan33.** Its port is faithful to its training, which reads the root quaternion
   (w, x, y, z) as (x, y, z, w) for its roll, pitch and yaw. A term for euler angles from
-  the base quaternion with a stated component order would make it the 32nd port read.
+  the base quaternion with a stated component order would make it the 32nd port read
+  ([#18](https://github.com/dundysm/gaitkeeper/issues/18), open for contributors).
+* **Windows in CI** ([#17](https://github.com/dundysm/gaitkeeper/issues/17), open for
+  contributors). PR #16's path bug is what a windows-latest runner would have caught.
 * **wty_cpp.** The one port rated well above the benchmark: 71 s here, 42 s in its MuJoCo
   and 33 s in its PhysX. In runs 3, 6 and 7 it falls about 1.3 s after the 5.1 s punch
   there and survives it here. Not explained by inference precision (1e-3 noise changes
