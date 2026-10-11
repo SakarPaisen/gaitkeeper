@@ -92,9 +92,6 @@ tests need traces recorded with `tools/record_mjlab.py`.
 
 Next, in order:
 
-* **PR #16** (doctor markdown report): blocked on one test, its Windows path case, which
-  fails on Linux. A check-in is scheduled for Monday October 12: merge once it is fixed,
-  or merge and fix the test in a follow-up commit.
 * **mturan33.** Its port is faithful to its training, which reads the root quaternion
   (w, x, y, z) as (x, y, z, w) for its roll, pitch and yaw. A term for euler angles from
   the base quaternion with a stated component order would make it the 32nd port read.
