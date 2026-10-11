@@ -150,8 +150,15 @@ def test_report_source_is_the_file_name_not_the_path():
 
     from gaitkeeper.cli import _report_source
 
+    # Both separators, because a Windows path is a single component to pathlib on POSIX and a
+    # POSIX path is one to pathlib on Windows, so the answer must not depend on the runner.
     assert _report_source(argparse.Namespace(policy="a/b/policy.yaml", onnx=None)) == "policy.yaml"
     assert _report_source(argparse.Namespace(policy="C:\\x\\p.yaml", onnx=None)) == "p.yaml"
+    assert _report_source(argparse.Namespace(policy="a\\b\\c.yaml", onnx=None)) == "c.yaml"
+    assert (
+        _report_source(argparse.Namespace(policy="/abs/deep/policy.yaml", onnx=None))
+        == "policy.yaml"
+    )
     # --onnx still names itself, so the two paths cannot be confused.
     assert (
         _report_source(argparse.Namespace(policy=None, onnx="m/onnx/model.onnx"))

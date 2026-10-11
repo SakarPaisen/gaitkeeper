@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import textwrap
 from pathlib import Path
@@ -539,7 +540,10 @@ def _report_source(args: argparse.Namespace) -> str:
     path = getattr(args, "policy", None) or getattr(args, "onnx", None)
     if not path:
         return "policy"
-    name = Path(path).name
+    # Split on both separators rather than Path(...).name: a Windows path is a single
+    # component to pathlib on POSIX (and a POSIX path to pathlib on Windows), so the
+    # answer has to be the same on every runner, not what that platform calls a name.
+    name = re.split(r"[\\/]", str(path))[-1]
     return f"{name} (onnx)" if getattr(args, "onnx", None) else name
 
 
