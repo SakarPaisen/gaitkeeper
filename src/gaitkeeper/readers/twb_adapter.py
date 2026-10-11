@@ -418,6 +418,12 @@ def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
     tmp = d / f"{ns}_{cls}_{key}{tag}{suffix}.part"
     cpp.write_text(code)
     cmd = [_compiler(), "-std=c++17", "-O1", "-shared", "-fPIC", "-w", str(cpp), "-o", str(tmp)]
+    if sys.platform == "win32":
+        # A mingw build links libstdc++-6.dll and libgcc_s_seh-1.dll, and Python 3.8+
+        # no longer searches PATH for a DLL's own dependencies, so the load fails with
+        # "Could not find module ... (or one of its dependencies)". Linking the runtime
+        # into the library (`-static`) keeps it self-contained and loadable.
+        cmd.insert(-2, "-static")
     try:
         r = subprocess.run(cmd, capture_output=True, text=True)
         if r.returncode != 0:
