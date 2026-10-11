@@ -41,7 +41,7 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <text x="376.0" y="87.5" class="val mono" text-anchor="middle" style="fill:#ffffff">59</text>
 <rect class="empty" x="406.5" y="74.5" width="53" height="18" rx="2"/>
 <rect class="cell" x="463" y="74" width="54" height="19" rx="2" opacity="0.61"><title>rl_gym, Arm walk: 50.5 s</title></rect>
-<text x="490.0" y="87.5" class="val mono" text-anchor="middle" style="fill:#ffffff">50</text>
+<text x="490.0" y="87.5" class="val mono" text-anchor="middle" style="fill:#ffffff">51</text>
 <rect class="cell" x="520" y="74" width="54" height="19" rx="2" opacity="0.33"><title>rl_gym, Punches: 21.2 s</title></rect>
 <text x="547.0" y="87.5" class="val mono" text-anchor="middle">21</text>
 <rect class="cell" x="577" y="74" width="54" height="19" rx="2" opacity="0.33"><title>rl_gym, Full: 21.2 s</title></rect>
@@ -96,7 +96,7 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <rect class="cell" x="463" y="162" width="54" height="19" rx="2" opacity="0.39"><title>dm_march, Arm walk: 28.0 s</title></rect>
 <text x="490.0" y="175.5" class="val mono" text-anchor="middle">28</text>
 <rect class="cell" x="520" y="162" width="54" height="19" rx="2" opacity="0.33"><title>dm_march, Punches: 21.5 s</title></rect>
-<text x="547.0" y="175.5" class="val mono" text-anchor="middle">22</text>
+<text x="547.0" y="175.5" class="val mono" text-anchor="middle">21</text>
 <rect class="cell" x="577" y="162" width="54" height="19" rx="2" opacity="0.16"><title>dm_march, Full: 4.3 s</title></rect>
 <text x="604.0" y="175.5" class="val mono" text-anchor="middle">4</text>
 <text x="20" y="197.5" class="name mono">handoff</text>
@@ -119,7 +119,7 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <text x="376.0" y="219.5" class="val mono" text-anchor="middle" style="fill:#ffffff">90</text>
 <rect class="cell" x="406" y="206" width="54" height="19" rx="2" opacity="1.00"><title>holosoma, Arms held: 90.0 s</title></rect>
 <text x="433.0" y="219.5" class="val mono" text-anchor="middle" style="fill:#ffffff">90</text>
-<rect class="cell" x="463" y="206" width="54" height="19" rx="2" opacity="0.16"><title>holosoma, Arm walk: 4.6 s</title></rect>
+<rect class="cell" x="463" y="206" width="54" height="19" rx="2" opacity="0.16"><title>holosoma, Arm walk: 4.5 s</title></rect>
 <text x="490.0" y="219.5" class="val mono" text-anchor="middle">5</text>
 <rect class="cell" x="520" y="206" width="54" height="19" rx="2" opacity="0.18"><title>holosoma, Punches: 6.2 s</title></rect>
 <text x="547.0" y="219.5" class="val mono" text-anchor="middle">6</text>
@@ -172,7 +172,7 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <rect class="cell" x="406" y="294" width="54" height="19" rx="2" opacity="1.00"><title>robomimic, Arms held: 90.0 s</title></rect>
 <text x="433.0" y="307.5" class="val mono" text-anchor="middle" style="fill:#ffffff">90</text>
 <rect class="cell" x="463" y="294" width="54" height="19" rx="2" opacity="0.16"><title>robomimic, Arm walk: 4.5 s</title></rect>
-<text x="490.0" y="307.5" class="val mono" text-anchor="middle">4</text>
+<text x="490.0" y="307.5" class="val mono" text-anchor="middle">5</text>
 <rect class="cell" x="520" y="294" width="54" height="19" rx="2" opacity="0.16"><title>robomimic, Punches: 4.2 s</title></rect>
 <text x="547.0" y="307.5" class="val mono" text-anchor="middle">4</text>
 <rect class="cell" x="577" y="294" width="54" height="19" rx="2" opacity="0.61"><title>robomimic, Full: 49.9 s</title></rect>
@@ -335,10 +335,10 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <rect class="cell" x="292" y="580" width="54" height="19" rx="2" opacity="0.13"><title>stepdown, Authors&#x27;: 1.4 s</title></rect>
 <text x="319.0" y="593.5" class="val mono" text-anchor="middle">1</text>
 <rect class="cell" x="349" y="580" width="54" height="19" rx="2" opacity="0.13"><title>stepdown, Port: 1.5 s</title></rect>
-<text x="376.0" y="593.5" class="val mono" text-anchor="middle">2</text>
+<text x="376.0" y="593.5" class="val mono" text-anchor="middle">1</text>
 <rect class="empty" x="406.5" y="580.5" width="53" height="18" rx="2"/>
 <rect class="cell" x="463" y="580" width="54" height="19" rx="2" opacity="0.13"><title>stepdown, Arm walk: 1.5 s</title></rect>
-<text x="490.0" y="593.5" class="val mono" text-anchor="middle">2</text>
+<text x="490.0" y="593.5" class="val mono" text-anchor="middle">1</text>
 <rect class="cell" x="520" y="580" width="54" height="19" rx="2" opacity="0.14"><title>stepdown, Punches: 1.6 s</title></rect>
 <text x="547.0" y="593.5" class="val mono" text-anchor="middle">2</text>
 <rect class="cell" x="577" y="580" width="54" height="19" rx="2" opacity="0.14"><title>stepdown, Full: 1.6 s</title></rect>
@@ -434,33 +434,33 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <text x="818.0" y="358" class="lab" text-anchor="middle">gaitkeeper: port, full benchmark (s)</text>
 <text transform="translate(668 211.0) rotate(-90)" class="lab" text-anchor="middle">benchmark, MuJoCo, same runs (s)</text>
 <circle class="pt" cx="755.6" cy="261.2" r="4.5"><title>rl_gym: 21.2 s here, 25.3 s in the benchmark</title></circle>
-<circle class="pt" cx="705.0" cy="321.2" r="4.5"><title>clobot: 1.9 s here, 1.9 s in the benchmark</title></circle>
-<circle class="pt" cx="712.6" cy="316.6" r="4.5"><title>legged_rl_lab: 4.8 s here, 3.7 s in the benchmark</title></circle>
-<circle class="pt" cx="829.8" cy="201.5" r="4.5"><title>asap: 49.5 s here, 48.7 s in the benchmark</title></circle>
-<circle class="pt" cx="711.3" cy="315.0" r="4.5"><title>dm_march: 4.3 s here, 4.3 s in the benchmark</title></circle>
+<circle class="pt" cx="704.9" cy="321.2" r="4.5"><title>clobot: 1.9 s here, 1.9 s in the benchmark</title></circle>
+<circle class="pt" cx="712.5" cy="316.6" r="4.5"><title>legged_rl_lab: 4.8 s here, 3.7 s in the benchmark</title></circle>
+<circle class="pt" cx="829.9" cy="201.5" r="4.5"><title>asap: 49.5 s here, 48.7 s in the benchmark</title></circle>
+<circle class="pt" cx="711.4" cy="315.0" r="4.5"><title>dm_march: 4.3 s here, 4.3 s in the benchmark</title></circle>
 <circle class="pt" cx="762.7" cy="265.5" r="4.5"><title>handoff: 23.9 s here, 23.7 s in the benchmark</title></circle>
-<circle class="pt" cx="716.3" cy="309.1" r="4.5"><title>holosoma: 6.2 s here, 6.6 s in the benchmark</title></circle>
-<circle class="pt" cx="716.5" cy="307.3" r="4.5"><title>huru: 6.3 s here, 7.3 s in the benchmark</title></circle>
+<circle class="pt" cx="716.2" cy="309.1" r="4.5"><title>holosoma: 6.2 s here, 6.6 s in the benchmark</title></circle>
+<circle class="pt" cx="716.6" cy="307.3" r="4.5"><title>huru: 6.3 s here, 7.3 s in the benchmark</title></circle>
 <circle class="pt" cx="787.1" cy="237.1" r="4.5"><title>rl_lab: 33.2 s here, 34.8 s in the benchmark</title></circle>
-<circle class="pt" cx="712.8" cy="313.4" r="4.5"><title>rl_mjlab: 4.9 s here, 4.9 s in the benchmark</title></circle>
+<circle class="pt" cx="712.9" cy="313.4" r="4.5"><title>rl_mjlab: 4.9 s here, 4.9 s in the benchmark</title></circle>
 <circle class="pt" cx="830.8" cy="186.7" r="4.5"><title>robomimic: 49.9 s here, 54.5 s in the benchmark</title></circle>
 <circle class="pt" cx="886.2" cy="217.9" r="4.5"><title>wty_cpp: 71.0 s here, 42.3 s in the benchmark</title></circle>
-<circle class="pt" cx="906.6" cy="106.9" r="4.5"><title>decoupled_wbc_h074_p000: 78.8 s here, 85.7 s in the benchmark</title></circle>
-<circle class="pt" cx="820.9" cy="244.7" r="4.5"><title>falcon: 46.1 s here, 31.8 s in the benchmark</title></circle>
+<circle class="pt" cx="906.7" cy="106.9" r="4.5"><title>decoupled_wbc_h074_p000: 78.8 s here, 85.7 s in the benchmark</title></circle>
+<circle class="pt" cx="821.0" cy="244.7" r="4.5"><title>falcon: 46.1 s here, 31.8 s in the benchmark</title></circle>
 <circle class="pt" cx="919.5" cy="103.4" r="4.5"><title>gr00t_wbc_h070_p000: 83.7 s here, 87.1 s in the benchmark</title></circle>
-<circle class="pt" cx="914.5" cy="117.0" r="4.5"><title>gr00t_wbc_h074_p000: 81.8 s here, 81.8 s in the benchmark</title></circle>
+<circle class="pt" cx="914.4" cy="117.0" r="4.5"><title>gr00t_wbc_h074_p000: 81.8 s here, 81.8 s in the benchmark</title></circle>
 <circle class="pt" cx="908.2" cy="122.9" r="4.5"><title>homie: 79.4 s here, 79.5 s in the benchmark</title></circle>
-<circle class="pt" cx="789.4" cy="241.4" r="4.5"><title>openwbt: 34.1 s here, 33.1 s in the benchmark</title></circle>
+<circle class="pt" cx="789.5" cy="241.4" r="4.5"><title>openwbt: 34.1 s here, 33.1 s in the benchmark</title></circle>
 <circle class="pt" cx="791.3" cy="231.1" r="4.5"><title>schoi: 34.8 s here, 37.1 s in the benchmark</title></circle>
-<circle class="pt" cx="892.5" cy="122.8" r="4.5"><title>zealot: 73.4 s here, 79.5 s in the benchmark</title></circle>
+<circle class="pt" cx="892.6" cy="122.8" r="4.5"><title>zealot: 73.4 s here, 79.5 s in the benchmark</title></circle>
 <circle class="pt" cx="704.7" cy="321.5" r="4.5"><title>dm_agile: 1.8 s here, 1.8 s in the benchmark</title></circle>
 <circle class="pt" cx="708.7" cy="319.0" r="4.5"><title>g1_gym: 3.3 s here, 2.7 s in the benchmark</title></circle>
 <circle class="pt" cx="705.8" cy="320.6" r="4.5"><title>nanog1: 2.2 s here, 2.1 s in the benchmark</title></circle>
 <circle class="pt" cx="704.2" cy="321.3" r="4.5"><title>stepdown: 1.6 s here, 1.8 s in the benchmark</title></circle>
-<circle class="pt" cx="705.8" cy="320.2" r="4.5"><title>wcompton: 2.2 s here, 2.3 s in the benchmark</title></circle>
-<circle class="pt" cx="927.3" cy="109.2" r="4.5"><title>decoupled_wbc_h066_p000: 86.7 s here, 84.8 s in the benchmark</title></circle>
-<circle class="pt" cx="927.3" cy="109.2" r="4.5"><title>decoupled_wbc_h066_p012: 86.7 s here, 84.8 s in the benchmark</title></circle>
-<circle class="pt" cx="929.7" cy="114.3" r="4.5"><title>decoupled_wbc_h070_p000: 87.6 s here, 82.8 s in the benchmark</title></circle>
+<circle class="pt" cx="705.9" cy="320.2" r="4.5"><title>wcompton: 2.2 s here, 2.3 s in the benchmark</title></circle>
+<circle class="pt" cx="927.4" cy="109.2" r="4.5"><title>decoupled_wbc_h066_p000: 86.7 s here, 84.8 s in the benchmark</title></circle>
+<circle class="pt" cx="927.5" cy="109.2" r="4.5"><title>decoupled_wbc_h066_p012: 86.7 s here, 84.8 s in the benchmark</title></circle>
+<circle class="pt" cx="929.8" cy="114.3" r="4.5"><title>decoupled_wbc_h070_p000: 87.6 s here, 82.8 s in the benchmark</title></circle>
 <circle class="pt" cx="928.4" cy="103.5" r="4.5"><title>gr00t_wbc_h066_p000: 87.1 s here, 87.1 s in the benchmark</title></circle>
-<circle class="pt" cx="928.4" cy="103.4" r="4.5"><title>gr00t_wbc_h066_p012: 87.1 s here, 87.1 s in the benchmark</title></circle>
+<circle class="pt" cx="928.3" cy="103.4" r="4.5"><title>gr00t_wbc_h066_p012: 87.1 s here, 87.1 s in the benchmark</title></circle>
 </svg>

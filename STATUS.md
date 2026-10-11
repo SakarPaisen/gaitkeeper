@@ -53,7 +53,7 @@ tests need traces recorded with `tools/record_mjlab.py`.
   Survival on the full benchmark tracks the benchmark's own
   MuJoCo numbers for the same runs (Pearson 0.98, Spearman 0.97, n = 30) with the port
   contracts read from the adapters, none written by hand; over the 11 that last under 15 s
-  it is 0.96, and against the benchmark's PhysX numbers 0.97. Run by run, 212 of the 300
+  it is 0.97, and against the benchmark's PhysX numbers 0.97. Run by run, 212 of the 300
   end within 1 s of the same run in the benchmark's MuJoCo; its own PhysX runs do so 169
   times. The widest gap, not yet explained, is wty_cpp: 71 s here, 42 s in the benchmark's
   MuJoCo and 33 s in its PhysX. Per-policy verdicts, with the authors' config as a first stage

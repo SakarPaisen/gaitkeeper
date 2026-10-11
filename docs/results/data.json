@@ -68,12 +68,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 52.6,
+     "mean_survival_s": 52.56,
      "complete": 3,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 49.5,
+     "mean_survival_s": 49.55,
      "complete": 1,
      "runs": 10
     },
@@ -83,7 +83,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 49.5,
+     "mean_survival_s": 49.55,
      "complete": 1,
      "runs": 10
     }
@@ -206,27 +206,27 @@
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 2.4,
+     "mean_survival_s": 2.39,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.9,
+     "mean_survival_s": 1.93,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.9,
+     "mean_survival_s": 1.87,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 2.4,
+     "mean_survival_s": 2.39,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.9,
+     "mean_survival_s": 1.87,
      "complete": 0,
      "runs": 10
     }
@@ -234,9 +234,7 @@
    "seconds": 90.0,
    "cause": "arms",
    "verdict": "Stands and tracks in its own setup (90 s); the harness taking the arms costs 88 s.",
-   "notes": [
-    "The port alone, arms still and no punches, costs 88 s."
-   ],
+   "notes": [],
    "deviation": [
     "The policy's contract against the upstream config:",
     "scale: 29 of 29 joints differ; largest relative +0.10% (left_hip_roll_joint)",
@@ -366,7 +364,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 86.7,
+     "mean_survival_s": 86.73,
      "complete": 7,
      "runs": 10
     },
@@ -376,7 +374,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 86.7,
+     "mean_survival_s": 86.73,
      "complete": 7,
      "runs": 10
     }
@@ -483,7 +481,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 86.7,
+     "mean_survival_s": 86.74,
      "complete": 7,
      "runs": 10
     },
@@ -493,7 +491,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 86.7,
+     "mean_survival_s": 86.74,
      "complete": 7,
      "runs": 10
     }
@@ -600,7 +598,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 87.6,
+     "mean_survival_s": 87.63,
      "complete": 8,
      "runs": 10
     },
@@ -610,7 +608,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 87.6,
+     "mean_survival_s": 87.63,
      "complete": 8,
      "runs": 10
     }
@@ -717,7 +715,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 78.8,
+     "mean_survival_s": 78.84,
      "complete": 5,
      "runs": 10
     },
@@ -727,7 +725,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 78.8,
+     "mean_survival_s": 78.84,
      "complete": 5,
      "runs": 10
     }
@@ -825,27 +823,27 @@
    "max_abs": 5.930071500515055e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 2.2,
+     "mean_survival_s": 2.18,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 2.1,
+     "mean_survival_s": 2.14,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 3.0,
+     "mean_survival_s": 3.02,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 2.9,
+     "mean_survival_s": 2.93,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 2.0,
+     "mean_survival_s": 2.01,
      "complete": 0,
      "runs": 10
     },
@@ -855,7 +853,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.8,
+     "mean_survival_s": 1.78,
      "complete": 0,
      "runs": 10
     }
@@ -973,7 +971,7 @@
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 81.2,
+     "mean_survival_s": 81.24,
      "complete": 9,
      "runs": 10
     },
@@ -983,22 +981,22 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 28.0,
+     "mean_survival_s": 28.03,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 21.5,
+     "mean_survival_s": 21.49,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 19.6,
+     "mean_survival_s": 19.63,
      "complete": 2,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 4.3,
+     "mean_survival_s": 4.35,
      "complete": 0,
      "runs": 10
     }
@@ -1007,7 +1005,7 @@
    "cause": "walk",
    "verdict": "Lasts 81 s in its own setup (9/10 complete); the random arm walk costs 62 s.",
    "notes": [
-    "The port alone, arms still and no punches, costs 62 s."
+    "With the arms held still and no punches, the port's own view of the arms costs 70 s (90.0 to 19.6 s)."
    ],
    "deviation": [
     "The policy's contract against the upstream config: no differences",
@@ -1127,12 +1125,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 81.3,
+     "mean_survival_s": 81.26,
      "complete": 8,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 46.1,
+     "mean_survival_s": 46.14,
      "complete": 0,
      "runs": 10
     },
@@ -1142,7 +1140,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 46.1,
+     "mean_survival_s": 46.14,
      "complete": 0,
      "runs": 10
     }
@@ -1238,37 +1236,37 @@
    "max_abs": 5.914050449362662e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 4.5,
+     "mean_survival_s": 4.47,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 6.6,
+     "mean_survival_s": 6.58,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 3.2,
+     "mean_survival_s": 3.16,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 3.0,
+     "mean_survival_s": 2.96,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 3.3,
+     "mean_survival_s": 3.33,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 3.2,
+     "mean_survival_s": 3.16,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 3.3,
+     "mean_survival_s": 3.33,
      "complete": 0,
      "runs": 10
     }
@@ -1400,7 +1398,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 87.1,
+     "mean_survival_s": 87.09,
      "complete": 9,
      "runs": 10
     },
@@ -1410,7 +1408,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 87.1,
+     "mean_survival_s": 87.09,
      "complete": 9,
      "runs": 10
     }
@@ -1519,7 +1517,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 87.1,
+     "mean_survival_s": 87.08,
      "complete": 9,
      "runs": 10
     },
@@ -1529,7 +1527,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 87.1,
+     "mean_survival_s": 87.08,
      "complete": 9,
      "runs": 10
     }
@@ -1757,7 +1755,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 81.8,
+     "mean_survival_s": 81.78,
      "complete": 7,
      "runs": 10
     },
@@ -1767,7 +1765,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 81.8,
+     "mean_survival_s": 81.78,
      "complete": 7,
      "runs": 10
     }
@@ -1896,12 +1894,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 29.2,
+     "mean_survival_s": 29.21,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 23.9,
+     "mean_survival_s": 23.93,
      "complete": 0,
      "runs": 10
     },
@@ -1911,7 +1909,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 23.9,
+     "mean_survival_s": 23.93,
      "complete": 0,
      "runs": 10
     }
@@ -2047,12 +2045,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 4.6,
+     "mean_survival_s": 4.55,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 6.2,
+     "mean_survival_s": 6.19,
      "complete": 0,
      "runs": 10
     },
@@ -2062,7 +2060,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 6.2,
+     "mean_survival_s": 6.19,
      "complete": 0,
      "runs": 10
     }
@@ -2298,7 +2296,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 6.3,
+     "mean_survival_s": 6.32,
      "complete": 0,
      "runs": 10
     },
@@ -2308,7 +2306,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 6.3,
+     "mean_survival_s": 6.32,
      "complete": 0,
      "runs": 10
     }
@@ -2431,27 +2429,27 @@
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 18.8,
+     "mean_survival_s": 18.79,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 4.2,
+     "mean_survival_s": 4.18,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 4.8,
+     "mean_survival_s": 4.76,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 18.8,
+     "mean_survival_s": 18.79,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 4.8,
+     "mean_survival_s": 4.76,
      "complete": 0,
      "runs": 10
     }
@@ -2459,9 +2457,7 @@
    "seconds": 90.0,
    "cause": "arms",
    "verdict": "Lasts 87 s in its own setup (9/10 complete); the harness taking the arms costs 69 s.",
-   "notes": [
-    "The port alone, arms still and no punches, costs 69 s."
-   ],
+   "notes": [],
    "deviation": [
     "Port values against the policy's contract:",
     "scale: no joint differs beyond the reference's float32 rounding",
@@ -2588,37 +2584,37 @@
    "max_abs": 7.317204464563076e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 2.4,
+     "mean_survival_s": 2.41,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 3.1,
+     "mean_survival_s": 3.13,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 3.4,
+     "mean_survival_s": 3.36,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.9,
+     "mean_survival_s": 1.94,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.8,
+     "mean_survival_s": 1.84,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 2.9,
+     "mean_survival_s": 2.87,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 2.2,
+     "mean_survival_s": 2.21,
      "complete": 0,
      "runs": 10
     }
@@ -2752,12 +2748,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 73.3,
+     "mean_survival_s": 73.34,
      "complete": 6,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 34.1,
+     "mean_survival_s": 34.15,
      "complete": 0,
      "runs": 10
     },
@@ -2767,7 +2763,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 34.1,
+     "mean_survival_s": 34.15,
      "complete": 0,
      "runs": 10
     }
@@ -2871,12 +2867,12 @@
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 59.3,
+     "mean_survival_s": 59.34,
      "complete": 4,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 50.5,
+     "mean_survival_s": 50.51,
      "complete": 2,
      "runs": 10
     },
@@ -2886,7 +2882,7 @@
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 59.3,
+     "mean_survival_s": 59.34,
      "complete": 4,
      "runs": 10
     },
@@ -3010,7 +3006,7 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 7.3,
+     "mean_survival_s": 7.34,
      "complete": 0,
      "runs": 10
     },
@@ -3025,7 +3021,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 33.2,
+     "mean_survival_s": 33.21,
      "complete": 0,
      "runs": 10
     }
@@ -3149,12 +3145,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 5.0,
+     "mean_survival_s": 5.03,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 4.9,
+     "mean_survival_s": 4.93,
      "complete": 0,
      "runs": 10
     },
@@ -3164,7 +3160,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 4.9,
+     "mean_survival_s": 4.93,
      "complete": 0,
      "runs": 10
     }
@@ -3282,12 +3278,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 4.5,
+     "mean_survival_s": 4.52,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 4.2,
+     "mean_survival_s": 4.24,
      "complete": 0,
      "runs": 10
     },
@@ -3297,7 +3293,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 49.9,
+     "mean_survival_s": 49.88,
      "complete": 1,
      "runs": 10
     }
@@ -3425,7 +3421,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 34.8,
+     "mean_survival_s": 34.82,
      "complete": 1,
      "runs": 10
     },
@@ -3435,7 +3431,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 34.8,
+     "mean_survival_s": 34.82,
      "complete": 1,
      "runs": 10
     }
@@ -3556,32 +3552,32 @@
    "max_abs": 4.166990758003308e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 1.4,
+     "mean_survival_s": 1.35,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 1.5,
+     "mean_survival_s": 1.48,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 1.5,
+     "mean_survival_s": 1.49,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 1.6,
+     "mean_survival_s": 1.59,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 1.5,
+     "mean_survival_s": 1.48,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 1.6,
+     "mean_survival_s": 1.59,
      "complete": 0,
      "runs": 10
     }
@@ -3746,37 +3742,37 @@
    "max_abs": 7.788287348375889e-07,
    "stages": {
     "upstream": {
-     "mean_survival_s": 3.4,
+     "mean_survival_s": 3.42,
      "complete": 0,
      "runs": 10
     },
     "own": {
-     "mean_survival_s": 3.4,
+     "mean_survival_s": 3.44,
      "complete": 0,
      "runs": 10
     },
     "arms_hold": {
-     "mean_survival_s": 4.4,
+     "mean_survival_s": 4.41,
      "complete": 0,
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 3.9,
+     "mean_survival_s": 3.89,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 2.2,
+     "mean_survival_s": 2.24,
      "complete": 0,
      "runs": 10
     },
     "port_quiet": {
-     "mean_survival_s": 4.4,
+     "mean_survival_s": 4.41,
      "complete": 0,
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 2.2,
+     "mean_survival_s": 2.24,
      "complete": 0,
      "runs": 10
     }
@@ -3942,12 +3938,12 @@
      "runs": 10
     },
     "arms_walk": {
-     "mean_survival_s": 21.9,
+     "mean_survival_s": 21.88,
      "complete": 0,
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 21.6,
+     "mean_survival_s": 21.64,
      "complete": 0,
      "runs": 10
     },
@@ -4103,7 +4099,7 @@
      "runs": 10
     },
     "punches": {
-     "mean_survival_s": 73.4,
+     "mean_survival_s": 73.44,
      "complete": 5,
      "runs": 10
     },
@@ -4113,7 +4109,7 @@
      "runs": 10
     },
     "port": {
-     "mean_survival_s": 73.4,
+     "mean_survival_s": 73.44,
      "complete": 5,
      "runs": 10
     }
@@ -4187,6 +4183,6 @@
   "Every stage now runs 10 seeds (3 before), and seed n is the benchmark's run n: the tour, the arm walk and the punches draw from the benchmark's own random streams, so each run here pairs with the same run there. The punches now land as the benchmark's do (at the joint's anchor, in a direction that turns with the link), the arm walk redraws a target that puts a hand behind its stance position or above the head, and every run starts as the benchmark's do (3 s on a crane at the harness's stance, then let go) and ends when the pelvis is below 0.2 m."
  ],
  "pearson": 0.983,
- "spearman": 0.975,
+ "spearman": 0.974,
  "n_corr": 30
 }
