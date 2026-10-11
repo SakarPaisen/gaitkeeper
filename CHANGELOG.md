@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.2
 
 * Ports that keep their own state are read: the adapter probe now recognizes an action
   observed more than one step back (`last_action` with `lag`), joint velocity taken as the
