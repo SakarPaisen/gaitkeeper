@@ -2542,7 +2542,7 @@
    "benchmark_mujoco": 2.828,
    "benchmark_physx": 4.256,
    "benchmark_runs": 512,
-   "reason": "Observes Euler angles computed from the base quaternion, read in the wrong component order (its roll reads pi when upright)."
+   "reason": "Observes roll, pitch and yaw computed from the base quaternion with its components taken in (x, y, z, w) order from a (w, x, y, z) quaternion, as its own training script does (so its roll reads pi when upright); the port matches its training, but gaitkeeper has no term for that observation yet."
   },
   {
    "name": "nanog1",
