@@ -39,9 +39,9 @@ gaitkeeper tells them apart, and says how much evidence backs the answer.
   <br>
   <sub>Thirty G1 walking policies and variants from rhoyn/teleop-walking-benchmark, each read from its port's own
   adapter code and run one change at a time. Most stand and walk until the harness moves their arms or the punches
-  start; five fall under their authors' own config. One that broke on the port's values (schoi, its waist held at
-  arm gains) is fixed in the benchmark since. Seed n draws the benchmark's run n, and 207 of the 300 runs end
-  within 1 s of the same run there. <a href="https://dundysm.github.io/gaitkeeper/results/">Full audit</a>.</sub>
+  start; five fall under their authors' own config, and rl_gym loses 31 s to the port's values alone. One that
+  broke on the port's values (schoi, its waist held at arm gains) is fixed in the benchmark since. Seed n draws
+  the benchmark's run n, and 212 of the 300 runs end within 1 s of the same run there. <a href="https://dundysm.github.io/gaitkeeper/results/">Full audit</a>.</sub>
 </p>
 
 ## How it decides

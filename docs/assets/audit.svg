@@ -290,8 +290,8 @@ text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Helvetica, 
 <text x="604.0" y="505.5" class="val mono" text-anchor="middle" style="fill:#ffffff">73</text>
 <text x="20" y="527.5" class="name mono">dm_agile</text>
 <text x="192" y="527.5" class="name" style="fill: var(--policy); font-weight:600">Policy</text>
-<rect class="cell" x="292" y="514" width="54" height="19" rx="2" opacity="0.31"><title>dm_agile, Authors&#x27;: 19.2 s</title></rect>
-<text x="319.0" y="527.5" class="val mono" text-anchor="middle">19</text>
+<rect class="cell" x="292" y="514" width="54" height="19" rx="2" opacity="0.14"><title>dm_agile, Authors&#x27;: 2.2 s</title></rect>
+<text x="319.0" y="527.5" class="val mono" text-anchor="middle">2</text>
 <rect class="cell" x="349" y="514" width="54" height="19" rx="2" opacity="0.14"><title>dm_agile, Port: 2.1 s</title></rect>
 <text x="376.0" y="527.5" class="val mono" text-anchor="middle">2</text>
 <rect class="cell" x="406" y="514" width="54" height="19" rx="2" opacity="0.15"><title>dm_agile, Arms held: 3.0 s</title></rect>

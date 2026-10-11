@@ -825,8 +825,8 @@
    "max_abs": 5.930071500515055e-08,
    "stages": {
     "upstream": {
-     "mean_survival_s": 19.2,
-     "complete": 1,
+     "mean_survival_s": 2.2,
+     "complete": 0,
      "runs": 10
     },
     "own": {
@@ -862,7 +862,7 @@
    },
    "seconds": 90.0,
    "cause": "policy",
-   "verdict": "Falls under its authors' own config (19.2 s of 90): the score belongs to the policy, not the port.",
+   "verdict": "Falls under its authors' own config (2.2 s of 90): the score belongs to the policy, not the port.",
    "notes": [],
    "deviation": [
     "The policy's contract against the upstream config: no differences",
