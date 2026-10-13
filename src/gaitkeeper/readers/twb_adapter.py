@@ -386,11 +386,9 @@ def _cache_dir() -> Path:
 
 
 def _lib_suffix() -> str:
-    """The shared-library suffix this platform loads.
+    """The platform's shared-library suffix: `.pyd` on Windows, `.so` elsewhere.
 
-    `ctypes.CDLL` on Windows wants a `.pyd` (a DLL with that name); `.so` is
-    the ELF/Mach-O name everywhere else. Hardcoding `.so` left Windows with a
-    file `CDLL` refused to open.
+    The suffix is only convention; `ctypes.CDLL` loads a full path whatever it ends in.
     """
     return ".pyd" if sys.platform == "win32" else ".so"
 
@@ -438,7 +436,6 @@ def build(policy_cpp: str | Path, cls: str = "Policy") -> Path:
             # library is already in place, so a completed `lib` is success, not an error.
             if not lib.exists():
                 raise
-            tmp.unlink(missing_ok=True)
             return lib
     finally:
         cpp.unlink(missing_ok=True)
